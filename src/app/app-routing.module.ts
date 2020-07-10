@@ -3,7 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    //TODO: auth guard
+    path: 'home',
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+  },
   { path: 'login', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
 ];
 

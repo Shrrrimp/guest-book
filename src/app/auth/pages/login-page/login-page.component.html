@@ -11,4 +11,22 @@
         </label>
         <button class="login-btn" type="submit">Login</button>
     </form>
+
+    <div *ngIf="login.errors">
+        <div *ngIf="login.errors.email">
+            Invalid email
+        </div>
+        <div *ngIf="login.errors.required">
+            email is required
+        </div>
+    </div>
+
+    <div *ngIf="password.errors">
+        password is required
+    </div>
+
+    <div *ngIf="isDataInvalid">
+        Wrong email or password!
+    </div>
 </div>
+

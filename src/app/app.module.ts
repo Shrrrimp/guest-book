@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthService } from './auth/services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 // import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -12,10 +14,11 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule
     // FormsModule,
     // ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
