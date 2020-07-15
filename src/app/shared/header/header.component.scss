@@ -1,0 +1,47 @@
+$blue: #070C27;
+$red: #FF4040;
+$white: #ffffff;
+$gray: #797FA5;
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('src/assets/fonts/ARLRDBD.ttf');
+}
+
+header {
+    position: absolute;
+    // position: relative;
+    width: 100%;
+    height: 70px;
+    left: 0px;
+    top: 0px;
+    background: $blue;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    h2 {
+        position: absolute;
+        // line-height: normal;
+        left: 38px;
+        vertical-align: middle;
+        font-family: Arial Rounded MT Bold;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        /* identical to box height */
+        text-align: center;
+        color: $white;
+    }
+    .links {
+        position: absolute;
+        left: 1360px;
+        top: 15px;
+        .notific {
+            img {
+                width: 40px;
+                height: 39px;
+            }
+            // width: 40px;
+            // height: 39px;
+            // background: url(src/assets/images/bell.png);
+        }
+    }
+}
