@@ -15,18 +15,10 @@
         </form>
     </div>
 
-    <ul *ngIf="commentsList; else noComments">
-        <li class="comment" *ngFor="let comment of commentsList.data; let i = index">
-            <span>
-                <strong>{{ i + 1 }} </strong>
-                <strong>Title: {{ comment.title }}</strong>
-            </span>
-            <p>Message: {{ comment.message }}</p>
-            <button (click)="updateComment(comment)">Update</button>
-            <button (click)="deleteComment(comment)">Delete</button>
-            <a *ngIf="comment.answers_count" href="#">See comments ({{ comment.answers_count }})</a>
-        </li>
+    <ul *ngIf="commentsService.commentsList; else noComments">
+            <app-comment *ngFor="let comment of commentsService.commentsList.data" [comment]="comment"></app-comment>
     </ul>
+    
     <ng-template #noComments>
         <p class="text-center">No comments yet...</p>
     </ng-template>

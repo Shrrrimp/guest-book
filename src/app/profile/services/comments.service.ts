@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CommentsList, Comment } from '../models/comment.model';
+import { Answer, AnswersList } from '../models/answer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class CommentsService {
 
   updateComment(commentId: number, title: string, message: string): Observable<Comment> {
     return this.http.put<Comment>(`${this.baseUrl}${this.postsUrl}/${commentId}`, {title, message});
+  }
+
+  getAnswersList(commentId: number): Observable<AnswersList> {
+    return this.http.get<AnswersList>(`${this.baseUrl}${this.postsUrl}/${commentId}/answers`);
   }
 }
