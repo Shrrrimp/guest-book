@@ -24,6 +24,7 @@
             <p>Message: {{ comment.message }}</p>
             <button (click)="updateComment(comment)">Update</button>
             <button (click)="deleteComment(comment)">Delete</button>
+            <a *ngIf="comment.answers_count" href="#">See comments ({{ comment.answers_count }})</a>
         </li>
     </ul>
     <ng-template #noComments>
