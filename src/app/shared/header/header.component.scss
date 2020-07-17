@@ -1,0 +1,44 @@
+$blue: #070C27;
+$red: #FF4040;
+$white: #ffffff;
+$gray: #797FA5;
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('src/assets/fonts/ARLRDBD.ttf');
+}
+
+header {
+    width: 100%;
+    height: 70px;
+    background: $blue;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    h2 {
+        margin: auto;
+        margin-left: 38px;
+        font-family: Arial Rounded MT Bold;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        text-align: center;
+        color: $white;
+    }
+    .links {
+        margin: auto;
+        margin-right: 40px;
+        a {
+            margin: auto;
+            // margin-right: 40px;
+            .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 100px;
+            }
+            .notific {
+                margin-right: 40px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+}
