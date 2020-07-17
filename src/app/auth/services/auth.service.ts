@@ -24,6 +24,7 @@ export class AuthService {
           console.log('ma user:');
           console.log(this.user);
           localStorage.setItem('token', this.token);
+          localStorage.setItem('userName', this.user.user.name);
         }
         return data;
       }));
@@ -42,8 +43,9 @@ export class AuthService {
     }));
   }
 
+  // TODO: пересмотреть метод
   public getCurrentUserName(): string {
-    return this.user.user.name;
+    return localStorage.userName;
   }
 
 }
