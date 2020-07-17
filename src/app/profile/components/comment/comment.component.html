@@ -1,0 +1,13 @@
+<li class="comment">
+    <span>
+        <strong>Title: {{ comment.title }}</strong>
+    </span>
+    <p>Message: {{ comment.message }}</p>
+    <button (click)="updateComment(comment)">Update</button>
+    <button (click)="deleteComment(comment)">Delete</button>
+    <a *ngIf="comment.answers_count" (click)="showAnswersList(comment)">See comments ({{ comment.answers_count }})</a>
+
+    <div *ngIf="answersList" class="answer">
+        <app-answer *ngFor="let answer of answersList.data" [answer]="answer"></app-answer>
+    </div>
+</li>
