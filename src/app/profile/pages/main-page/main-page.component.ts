@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommentsService } from '../../services/comments.service';
-import { CommentsList, Comment } from '../../models/comment.model';
 
 
 @Component({
@@ -10,10 +9,9 @@ import { CommentsList, Comment } from '../../models/comment.model';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-  public commentsList: CommentsList | null;
   public addCommentForm: FormGroup;
 
-  constructor(private commentsService: CommentsService) { }
+  constructor(public commentsService: CommentsService) { }
 
   ngOnInit(): void {
     this.addCommentForm = new FormGroup({
@@ -22,7 +20,11 @@ export class MainPageComponent implements OnInit {
     });
 
     this.commentsService.getCommentsList().subscribe((data) => {
-      this.commentsList = data;
+      this.commentsService.commentsList = data;
+
+      console.log('comments:');
+      console.log(this.commentsService.commentsList);
+
     }, err => console.error(err));
   }
 
@@ -33,30 +35,10 @@ export class MainPageComponent implements OnInit {
   addComment() {
     if (this.addCommentForm.valid) {
       this.commentsService.addComment(this.title.value, this.message.value).subscribe(data => {
-        this.commentsList.data.unshift(data);
+        this.commentsService.commentsList.data.unshift(data);
         this.addCommentForm.reset();
       }, err => console.error(err));
     }
-  }
-
-  updateComment(comment: Comment) {
-    // TODO: поменять на данные из формы
-
-    const title = `updated title. ${comment.title}`;
-    const message = `updated message. ${comment.message}`;
-
-    this.commentsService.updateComment(comment.id, title, message).subscribe((data) => {
-      const toUpdate = this.commentsList.data.indexOf(comment);
-      if (toUpdate !== -1) {
-        this.commentsList.data[toUpdate] = data;
-      }
-    }, err => console.error(err));
-  }
-
-  deleteComment(comment: Comment) {
-    this.commentsService.deleteComment(comment.id).subscribe(() => {
-      this.commentsList.data = this.commentsList.data.filter(c => c.id !== comment.id);
-    }, err => console.error(err));
   }
 
 }
