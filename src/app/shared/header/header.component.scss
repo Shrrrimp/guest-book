@@ -8,12 +8,8 @@ $gray: #797FA5;
 }
 
 header {
-    position: absolute;
-    // position: relative;
     width: 100%;
     height: 70px;
-    left: 0px;
-    top: 0px;
     background: $blue;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -30,12 +26,18 @@ header {
     .links {
         margin: auto;
         margin-right: 40px;
-        .notific {
+        a {
             margin: auto;
-            margin-right: 40px;
-            img {
+            // margin-right: 40px;
+            .avatar {
                 width: 40px;
-                height: 39px;
+                height: 40px;
+                border-radius: 100px;
+            }
+            .notific {
+                margin-right: 40px;
+                width: 40px;
+                height: 40px;
             }
         }
     }
