@@ -1,8 +1,8 @@
 <div class="new-entry">
-    <img src="assets/images/ava.png" alt="">
-    <form name="entry-block" method="post" action="#">
-        <input type="text" size="40" placeholder="Title">
-        <textarea name="entry" rows="6" placeholder="New entry..."></textarea>
+    <img src="{{ currentUserPic }}" alt="{{ currentUserName }}">
+    <form (ngSubmit)="addComment()" [formGroup]="addCommentForm" name="entry-block" method="post">
+        <input type="text" size="40" placeholder="Title" formControlName="title" maxlength="255">
+        <textarea name="entry" rows="6" placeholder="New entry..." formControlName="message" maxlength="65535"></textarea>
         <input type="submit" value="Add">
     </form>
 </div>
@@ -11,28 +11,13 @@
 </div>
 
 
-<!-- <p>Comments: </p>
+<p>Comments: </p>
 <div>
-    <div>
-        <form (ngSubmit)="addComment()" [formGroup]="addCommentForm">
-            <h2>Add comment</h2>
-            <label>
-                <p>title</p> 
-                <input type="text" formControlName="title" maxlength="255">
-            </label>
-            <label>
-                <p>message</p> 
-                <input type="text" formControlName="message" maxlength="65535">
-            </label>
-            <button type="submit">add</button>
-        </form>
-    </div>
-
     <ul *ngIf="commentsService.commentsList; else noComments">
-            <app-comment *ngFor="let comment of commentsService.commentsList.data" [comment]="comment"></app-comment>
+        <app-comment *ngFor="let comment of commentsService.commentsList.data" [comment]="comment"></app-comment>
     </ul>
     
     <ng-template #noComments>
         <p class="text-center">No comments yet...</p>
     </ng-template>
-</div> -->
+</div>
