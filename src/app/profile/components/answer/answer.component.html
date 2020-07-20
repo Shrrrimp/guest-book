@@ -1,2 +1,18 @@
-<p>answer</p>
-<strong><p>{{ answer.message }}</p></strong>
+<div class="answer">
+    <img class="avatar" src="assets/images/no_avatar.png" alt="">
+    <div class="right-block">
+        <div class="info">
+            <h4>User name</h4>
+            <div class="date">08.07.2020</div><br>
+            <a href="mailto:useremail@gmail.com" class="email">useremail@gmail.com</a>
+        </div>
+        <div class="buttons">
+            <button (click)="updateComment(comment)"><img src="assets/images/pen.png" alt=""></button>
+            <button (click)="deleteComment(comment)"><img src="assets/images/trash-can.png" alt=""></button>
+        </div>
+
+        <p class="text">{{ answer.message }}</p>
+
+    </div>
+
+</div>
