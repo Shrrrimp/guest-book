@@ -35,4 +35,8 @@ export class CommentsService {
   getAnswersList(commentId: number): Observable<AnswersList> {
     return this.http.get<AnswersList>(`${this.baseUrl}${this.postsUrl}/${commentId}/answers`);
   }
+
+  getNextAnswersPage(commentId: number, page: number): Observable<AnswersList> {
+    return this.http.get<AnswersList>(`${this.baseUrl}${this.postsUrl}/${commentId}/answers?page=${page}`);
+  }
 }

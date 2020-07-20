@@ -8,6 +8,7 @@
     <a *ngIf="comment.answers_count" (click)="showAnswersList(comment)">See comments ({{ comment.answers_count }})</a>
 
     <div *ngIf="answersList" class="answer">
-        <app-answer *ngFor="let answer of answersList.data" [answer]="answer"></app-answer>
+        <app-answer *ngFor="let answer of answersList.data | paginate: paginationConfig" [answer]="answer"></app-answer>
+        <pagination-controls (pageChange)="onPageChange($event)" [id]="comment.id"></pagination-controls>
     </div>
 </li>
