@@ -1,45 +1,81 @@
-$blue: #2f80ed;
+$blue: #070C27;
+$red: #FF4040;
 $white: #ffffff;
-$gray: #e5e5e5;
+$gray: #797FA5;
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('src/assets/fonts/ARLRDBD.ttf');
+}
 
 .login-form {
     margin: 50px auto;
     width: fit-content;
     padding: 20px;
+    border: 0;
+    background: $white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
-    background-color: lighten($color: $gray, $amount: 3);
-
     form {
         display: flex;
         flex-direction: column;
-
         h2 {
-            margin-bottom: 10px;
-            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            font-family: Arial Rounded MT Bold;
+            font-style: normal;
             font-weight: bold;
+            color: $blue;
+            font-size: 18px;
+        }
+        .wrong-data {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial Rounded MT Bold;
+            font-style: normal;
+            font-weight: bold;
+            color: $red;
+            font-size: 12px;
+            height: 40px;
+            background: $white;
+            border: 1px solid $red;
+            border-radius: 5px;
         }
     }
-
     label {
+        .titles {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            .error {
+                margin-left: auto;
+                color: $red;
+            }
+        }
         display: flex;
         flex-direction: column;
-        margin-bottom: 5px;
-
+        margin-top: 20px;
         p {
-            margin: 2px 5px;
+            margin-bottom: 10px;
             font-size: 12px;
-            color: #828282;
+            color: $blue;
+            font-family: Arial Rounded MT Bold;
+            font-style: normal;
         }
     }
-
     input {
         width: 300px;
         padding-left: 5px;
         height: 35px;
-        background-color: darken($color: $gray, $amount: 5);
         border: none;
+        background: $white;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
     }
-
+    .required {
+        box-shadow: 0px 0px 5px $red;
+    }
     .login-btn {
         margin: 20px 0 0 auto;
         padding: 8px 0;
@@ -48,10 +84,18 @@ $gray: #e5e5e5;
         border-radius: 5px;
         border: none;
         background-color: $blue;
+        font-family: Arial Rounded MT Bold;
+        font-style: normal;
     }
-
     .login-btn:hover {
         cursor: pointer;
-        background-color: lighten($color: $blue, $amount: 5);
+        background-color: $gray;
+        color: $blue;
+    }
+    form:active,
+     :hover,
+     :focus {
+        outline: 0;
+        outline-offset: 0;
     }
 }

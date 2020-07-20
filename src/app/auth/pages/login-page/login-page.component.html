@@ -1,17 +1,38 @@
 <div class="login-form">
     <form (ngSubmit)="submit()" [formGroup]="form">
         <h2>Log in</h2>
+        <div *ngIf="isDataInvalid" class="wrong-data">
+            Wrong login or password!
+        </div>
+        <!-- <div class="wrong-data">
+            Wrong login or password!
+        </div> -->
         <label>
-            <p>login</p> 
-            <input type="text" formControlName="login">
+            <div *ngIf="login.errors" class="titles">
+                <p>Login</p>
+                <p *ngIf="login.errors.email" class="error">
+                    Invalid email
+                </p>
+                <!-- <p *ngIf="login.errors.required" class="error">
+                    Email is required
+                </p> -->
+            </div> 
+            <input class="required" type="text" formControlName="login" required>
         </label>
         <label>
-            <p>password</p> 
-            <input type="password" formControlName="password">
+            <div  class="titles">
+                <p>Password</p> 
+              <!-- <p *ngIf="password.errors" class="error">Password is required</p> -->
+            </div>
+            <input type="password" formControlName="password" required>
         </label>
         <button class="login-btn" type="submit">Login</button>
+
+
+
     </form>
 
+    <!-- 
     <div *ngIf="login.errors">
         <div *ngIf="login.errors.email">
             Invalid email
@@ -19,14 +40,15 @@
         <div *ngIf="login.errors.required">
             email is required
         </div>
-    </div>
+    </div> -->
 
-    <div *ngIf="password.errors">
+    <!-- <div *ngIf="password.errors">
         password is required
-    </div>
+    </div> -->
 
+    <!-- 
     <div *ngIf="isDataInvalid">
         Wrong email or password!
-    </div>
-</div>
+    </div> -->
 
+</div>

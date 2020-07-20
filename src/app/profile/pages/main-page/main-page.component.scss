@@ -4,9 +4,15 @@ $red: #FF4040;
 $white: #ffffff;
 $gray: #797FA5;
 @font-face {
-    font-family: 'Arial';
     font-family: 'Arial Rounded MT Bold';
     src: url('src/assets/fonts/ARLRDBD.ttf');
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .new-entry {
@@ -14,12 +20,12 @@ $gray: #797FA5;
     justify-content: center;
     margin-top: 40px;
     width: 100%;
-    img {
-        width: 40px;
-        height: 40px;
-        border-radius: 100px;
-        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
-    }
+    // img {
+    //     width: 40px;
+    //     height: 40px;
+    //     border-radius: 100px;
+    //     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+    // }
     form {
         width: 60%;
         margin-left: 40px;
