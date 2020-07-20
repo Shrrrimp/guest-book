@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommentsService } from '../../services/comments.service';
-
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-main-page',
@@ -10,14 +10,25 @@ import { CommentsService } from '../../services/comments.service';
 })
 export class MainPageComponent implements OnInit {
   public addCommentForm: FormGroup;
+  public currentUserPic: string;
+  public currentUserName: string;
 
-  constructor(public commentsService: CommentsService) { }
+  constructor(public commentsService: CommentsService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.addCommentForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       message: new FormControl('', [Validators.required, Validators.maxLength(65535)])
     });
+
+    this.currentUserPic = 'assets/images/no_avatar.png';
+
+    // TODO: загрузка юзер картинки
+    // this.authService.getCurrentUserPic().subscribe(data => {
+    //   this.currentUserPic = data;
+    // }, err => console.error(err));
+
+    this.currentUserName = this.authService.getCurrentUserName();
 
     this.commentsService.getCommentsList().subscribe((data) => {
       this.commentsService.commentsList = data;

@@ -12,6 +12,12 @@ export class CommentComponent implements OnInit {
 
   @Input() public comment: Comment | undefined;
   public answersList: AnswersList | null;
+  public paginationConfig = {
+    id: '',
+    itemsPerPage: 0,
+    currentPage: 0,
+    totalItems: 0
+  };
 
   constructor(public commentsService: CommentsService) { }
 
@@ -40,12 +46,20 @@ export class CommentComponent implements OnInit {
 
   showAnswersList(comment: Comment) {
     this.commentsService.getAnswersList(comment.id).subscribe((data) => {
-
-      console.log('answers:');
-      console.log(data);
-
       this.answersList = data;
+
+      this.paginationConfig.id = `${comment.id}`;
+      this.paginationConfig.currentPage = this.answersList.meta.current_page;
+      this.paginationConfig.itemsPerPage = this.answersList.meta.per_page;
+      this.paginationConfig.totalItems = this.answersList.meta.total;
     }, err => console.error(err));
+  }
+
+  onPageChange($event) {
+    this.paginationConfig.currentPage = $event;
+    this.commentsService.getNextAnswersPage(this.comment.id, $event).subscribe((data) => {
+      this.answersList = data;
+    });
   }
 
 }

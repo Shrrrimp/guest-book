@@ -5,7 +5,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnswerComponent } from './components/answer/answer.component';
 import { CommentComponent } from './components/comment/comment.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [MainPageComponent, AnswerComponent, CommentComponent],
@@ -13,7 +13,8 @@ import { CommentComponent } from './components/comment/comment.component';
     CommonModule,
     ProfileRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ]
 })
 export class ProfileModule { }
