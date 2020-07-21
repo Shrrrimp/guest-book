@@ -8,7 +8,8 @@
         </div>
         <div class="buttons">
             <button (click)="updateComment(comment)"><img src="assets/images/pen.png" alt="edit"></button>
-            <button (click)="deleteComment(comment)"><img src="assets/images/trash-can.png" alt="delete"></button>
+            <!-- <button (click)="deleteComment(comment)"><img src="assets/images/trash-can.png" alt="delete"></button> -->
+            <button (click)="showModal()"><img src="assets/images/trash-can.png" alt="delete"></button>
         </div>
 
         <div class="message">
@@ -27,3 +28,5 @@
     </div>
 
 </li>
+
+<app-modal-dialog *ngIf="isModalDialogVisible" [message]="modalMessage" (isConfirmed)="closeModal($event, comment)"></app-modal-dialog>
