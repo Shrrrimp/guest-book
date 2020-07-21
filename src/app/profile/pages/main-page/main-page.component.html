@@ -9,8 +9,8 @@
 
 
 
-<p>Comments: </p>
-<div>
+<!-- <p>Comments: </p> -->
+<div class="comments">
     <ul *ngIf="commentsService.commentsList; else noComments">
         <app-comment *ngFor="let comment of commentsService.commentsList.data" [comment]="comment"></app-comment>
     </ul>
