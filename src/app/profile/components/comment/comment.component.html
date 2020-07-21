@@ -1,14 +1,14 @@
 <li class="comment">
-    <img class="avatar" src="assets/images/no_avatar.png" alt="">
+    <img class="avatar" src="assets/images/no_avatar.png" alt="{{ comment.user.name }}">
     <div class="right-block">
         <div class="info">
-            <h4>User name</h4>
+            <h4>{{ comment.user.name }}</h4>
             <div class="date">{{comment.created_at}}</div><br>
-            <a href="mailto:useremail@gmail.com" class="email">useremail@gmail.com</a>
+            <a href="mailto:{{ comment.user.email }}" class="email">{{ comment.user.email }}</a>
         </div>
         <div class="buttons">
-            <button (click)="updateComment(comment)"><img src="assets/images/pen.png" alt=""></button>
-            <button (click)="deleteComment(comment)"><img src="assets/images/trash-can.png" alt=""></button>
+            <button (click)="updateComment(comment)"><img src="assets/images/pen.png" alt="edit"></button>
+            <button (click)="deleteComment(comment)"><img src="assets/images/trash-can.png" alt="delete"></button>
         </div>
 
         <div class="message">
@@ -17,7 +17,7 @@
         </div>
 
         <a class="answers-link" *ngIf="comment.answers_count" (click)="showAnswersList(comment)">Comments ({{ comment.answers_count }}) 
-            <img class="opened" src="assets/images/triangle.png" alt="">
+            <img class="opened" src="assets/images/triangle.png" alt="show answers">
         </a>
 
         <div *ngIf="answersList" class="answer">
