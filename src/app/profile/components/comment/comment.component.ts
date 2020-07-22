@@ -18,6 +18,8 @@ export class CommentComponent implements OnInit {
     currentPage: 0,
     totalItems: 0
   };
+  public isModalDialogVisible = false;
+  public modalMessage = 'Do you want to delete message?';
 
   constructor(public commentsService: CommentsService) { }
 
@@ -42,6 +44,17 @@ export class CommentComponent implements OnInit {
     this.commentsService.deleteComment(comment.id).subscribe(() => {
       this.commentsService.commentsList.data = this.commentsService.commentsList.data.filter(c => c.id !== comment.id);
     }, err => console.error(err));
+  }
+
+  showModal() {
+    this.isModalDialogVisible = true;
+  }
+
+  closeModal($event: boolean, comment: Comment) {
+    this.isModalDialogVisible = false;
+    if ($event) {
+      this.deleteComment(comment);
+    }
   }
 
   showAnswersList(comment: Comment) {
