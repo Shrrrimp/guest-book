@@ -2,12 +2,12 @@ $blue: #070C27;
 $red: #FF4040;
 $white: #ffffff;
 $gray: #797FA5;
-@font-face {
-    font-family: 'Arial Rounded MT Bold';
-    src: url('src/assets/fonts/ARLRDBD.ttf');
+.book-anim {
+    margin: 40px 0;
+    text-align: center;
 }
 
-img {
+.avatar {
     width: 40px;
     height: 40px;
     border-radius: 100px;
@@ -75,7 +75,7 @@ img {
             background-color: $blue;
             border: none;
             border-radius: 5px;
-            font-family: Arial Rounded MT Bold;
+            font-family: Arial;
             font-style: normal;
             font-weight: bold;
             font-size: 14px;
