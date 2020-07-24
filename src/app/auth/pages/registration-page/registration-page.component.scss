@@ -2,7 +2,7 @@ $blue: #070C27;
 $red: #FF4040;
 $white: #ffffff;
 $gray: #797FA5;
-.login-form {
+.reg-form {
     margin: 50px auto;
     width: fit-content;
     padding: 20px;
@@ -22,21 +22,27 @@ $gray: #797FA5;
             color: $blue;
             font-size: 18px;
         }
-        .wrong-data {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial;
-            font-style: normal;
-            font-weight: bold;
-            color: $red;
-            font-size: 12px;
-            height: 40px;
-            background: $white;
-            border: 1px solid $red;
-            border-radius: 5px;
+        .avatar {
+            margin: 20px auto 0;
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
         }
+        // .wrong-data {
+        //     margin-top: 20px;
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //     font-family: Arial;
+        //     font-style: normal;
+        //     font-weight: bold;
+        //     color: $red;
+        //     font-size: 12px;
+        //     height: 40px;
+        //     background: $white;
+        //     border: 1px solid $red;
+        //     border-radius: 5px;
+        // }
     }
     label {
         .titles {
@@ -62,7 +68,7 @@ $gray: #797FA5;
             font-weight: bold;
         }
     }
-    input {
+    .text-input {
         width: 300px;
         padding-left: 5px;
         height: 35px;
@@ -74,7 +80,7 @@ $gray: #797FA5;
     .required {
         box-shadow: 0px 0px 5px $red;
     }
-    .login-btn {
+    .reg-btn {
         margin: 20px 0 0 auto;
         padding: 8px 0;
         width: 120px;
@@ -86,10 +92,28 @@ $gray: #797FA5;
         font-style: normal;
         font-weight: bold;
     }
-    .login-btn:hover {
-        cursor: pointer;
-        background-color: $gray;
+    .img-add-btn {
+        margin: 0 0 0 auto;
+        padding: 8px 0;
+        width: 120px;
         color: $blue;
+        border-radius: 5px;
+        border: none;
+        background-color: $gray;
+        font-family: Arial;
+        font-style: normal;
+        font-weight: bold;
+    }
+    #delete {
+        width: 40px;
+    }
+    .reg-btn:hover {
+        cursor: pointer;
+        filter: brightness(60%);
+    }
+    .img-add-btn:hover {
+        cursor: pointer;
+        filter: brightness(60%);
     }
     form:active,
      :hover,

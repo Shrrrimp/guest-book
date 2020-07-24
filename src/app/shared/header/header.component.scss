@@ -21,15 +21,32 @@ header {
     .links {
         margin: auto;
         margin-right: 40px;
+        // width: 110px;
         a {
-            margin: auto;
+            // margin: auto;
+            display: inline-block;
             vertical-align: middle;
+            width: fit-content;
+            height: fit-content;
             .notific {
-                margin-right: 40px;
                 width: 30px;
                 height: 30px;
+                margin-top: 10px;
+            }
+            .alert {
+                position: relative;
+                left: 17px;
+                bottom: 15px;
+                z-index: 1;
+                margin: 0;
+                width: 12px;
+                height: 12px;
+                background: $red;
+                border-radius: 100px;
+                // border: 1px solid $white;
             }
             .avatar {
+                margin-left: 40px;
                 width: 40px;
                 height: 40px;
                 border-radius: 100px;

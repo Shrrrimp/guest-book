@@ -7,90 +7,108 @@ $gray: #797FA5;
     text-align: center;
 }
 
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 100px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.new-entry {
+.container {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    // margin-top: 40px;
     width: 100%;
-    form {
-        // width: 60%;
-        width: 620px;
-        margin-left: 40px;
-        input[type=text] {
-            display: block;
-            width: 100%;
+    .new-entry {
+        padding: 40px 40pх 40pх 75px;
+        // width: 740px;
+        width: 705px;
+        // background: $white;
+        // box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+        // border-radius: 5px;
+        .avatar {
+            width: 40px;
             height: 40px;
-            border: 0;
-            background: $white;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
-            padding-left: 40px;
-            padding-right: 40px;
-            font-family: Arial;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 14px;
+            border-radius: 100px;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+            display: inline-block;
         }
-        textarea {
-            display: block;
-            width: 100%;
-            border: 0;
-            border-radius: 5px;
-            background-color: $white;
-            resize: none;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-            font-family: Arial;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 14px;
-            padding-left: 40px;
-            padding-top: 20px;
-            padding-right: 40px;
-            margin-top: 20px;
+        .right-block {
+            // width: 500px;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 40px;
+            form {
+                // width: 100%;
+                width: 580px;
+                // margin-left: 40px;
+                // width: 580px;
+                // padding-right: 75px;
+                input[type=text] {
+                    // display: block;
+                    width: 100%;
+                    // width: 580px;
+                    height: 40px;
+                    border: 0;
+                    background: $white;
+                    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+                    border-radius: 5px;
+                    padding-left: 40px;
+                    padding-right: 40px;
+                    font-family: Arial;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 14px;
+                }
+                textarea {
+                    // display: block;
+                    width: 100%;
+                    // width: 580px;
+                    border: 0;
+                    border-radius: 5px;
+                    background-color: $white;
+                    resize: none;
+                    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+                    font-family: Arial;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 14px;
+                    padding-left: 40px;
+                    padding-top: 20px;
+                    padding-right: 40px;
+                    margin-top: 20px;
+                }
+                input[type=text]::placeholder {
+                    color: $gray;
+                }
+                textarea::placeholder {
+                    color: $gray;
+                }
+                input[type=text]:focus::placeholder {
+                    color: transparent
+                }
+                textarea:focus::placeholder {
+                    color: transparent
+                }
+                input[type=submit] {
+                    margin-top: 20px;
+                    cursor: pointer;
+                    width: 130px;
+                    height: 40px;
+                    background-color: $blue;
+                    border: none;
+                    border-radius: 5px;
+                    font-family: Arial;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 14px;
+                    color: $white;
+                }
+                input[type=submit]:hover {
+                    background-color: $gray;
+                    color: $blue;
+                }
+            }
+            form:active,
+             :hover,
+             :focus {
+                outline: 0;
+                outline-offset: 0;
+            }
         }
-        input[type=text]::placeholder {
-            color: $gray;
-        }
-        textarea::placeholder {
-            color: $gray;
-        }
-        input[type=text]:focus::placeholder {
-            color: transparent
-        }
-        textarea:focus::placeholder {
-            color: transparent
-        }
-        input[type=submit] {
-            margin-top: 20px;
-            cursor: pointer;
-            width: 130px;
-            height: 40px;
-            background-color: $blue;
-            border: none;
-            border-radius: 5px;
-            font-family: Arial;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 14px;
-            color: $white;
-        }
-        input[type=submit]:hover {
-            background-color: $gray;
-            color: $blue;
-        }
-    }
-    form:active,
-     :hover,
-     :focus {
-        outline: 0;
-        outline-offset: 0;
     }
 }
 
