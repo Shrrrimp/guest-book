@@ -17,6 +17,9 @@
             <p class="text"> {{ comment.message }}</p>
         </div>
 
+        // vladis
+        <button (click)=addAnswer()>add answer</button>
+        // vladis
 
         <a class="answers-link" *ngIf="comment.answers_count" (click)="showAnswersList(comment)">Comments ({{ comment.answers_count }}) 
             <img class="opened" src="assets/images/triangle.png" alt="show answers">

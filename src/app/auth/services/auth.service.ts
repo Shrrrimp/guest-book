@@ -26,6 +26,7 @@ export class AuthService {
           localStorage.setItem('token', this.token);
           localStorage.setItem('userName', this.user.user.name);
           localStorage.setItem('userEmail', this.user.user.email);
+          localStorage.setItem('userId', this.user.user.id.toString());
         }
         return data;
       }));
@@ -54,5 +55,11 @@ export class AuthService {
     // return this.user.user.email;
     return localStorage.userEmail;
   }
+
+    // TODO: пересмотреть метод
+    public getCurrentUserId(): string {
+      // return this.user.user.email;
+      return localStorage.userId;
+    }
 
 }
