@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Comment } from '../../models/comment.model';
 import { CommentsService } from '../../services/comments.service';
 import { AnswersList } from '../../models/answer.model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-comment',
@@ -11,6 +12,7 @@ import { AnswersList } from '../../models/answer.model';
 export class CommentComponent implements OnInit {
 
   @Input() public comment: Comment | undefined;
+  public addAnswerForm: FormGroup;
   public answersList: AnswersList | null;
   public paginationConfig = {
     id: '',
@@ -23,7 +25,11 @@ export class CommentComponent implements OnInit {
 
   constructor(public commentsService: CommentsService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.addAnswerForm = new FormGroup({
+      message: new FormControl('', [Validators.required, Validators.maxLength(65535)])
+    });
+  }
 
   updateComment(comment: Comment) {
     // TODO: поменять на данные из формы
@@ -77,16 +83,18 @@ export class CommentComponent implements OnInit {
     });
   }
 
-  // ToDO: переделать под данные из формы
-  addAnswer() {
+  get message() { return this.addAnswerForm.get('message'); }
+
+  async addAnswer() {
+    if (!this.addAnswerForm.valid) { return; }
+
     if (!this.answersList) {
-      this.commentsService.getAnswersList(this.comment.id).subscribe((data) => {
-        this.answersList = data;
-      });
+      this.answersList = await this.commentsService.getAnswersList(this.comment.id).toPromise();
     }
 
-    this.commentsService.addAnswer(this.comment.id, 'hi, Im answer').subscribe(data => {
+    this.commentsService.addAnswer(this.comment.id, this.message.value).subscribe(data => {
       this.answersList.data.unshift(data);
+      ++this.comment.answers_count;
     }, err => console.error(err));
   }
 

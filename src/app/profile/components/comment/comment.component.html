@@ -8,7 +8,6 @@
         </div>
         <div class="buttons">
             <button (click)="updateComment(comment)"><img src="assets/images/pen.png" alt="edit"></button>
-            <!-- <button (click)="deleteComment(comment)"><img src="assets/images/trash-can.png" alt="delete"></button> -->
             <button (click)="showModal()"><img src="assets/images/trash-can.png" alt="delete"></button>
         </div>
 
@@ -17,23 +16,17 @@
             <p class="text"> {{ comment.message }}</p>
         </div>
 
-        // vladis
-        <button (click)=addAnswer()>add answer</button>
-        // vladis
-
-        <a class="answers-link" *ngIf="comment.answers_count" (click)="showAnswersList(comment)">Comments ({{ comment.answers_count }}) 
-            <img class="opened" src="assets/images/triangle.png" alt="show answers">
-        </a>
-
-
         <div class="add-answer">
             <img src="assets/images/no_avatar.png" alt="">
-            <form name="answer-block" method="post">
-                <textarea name="answer" rows="2" placeholder="Add comment..." maxlength="65535"></textarea>
+            <form (ngSubmit)="addAnswer()" [formGroup]="addAnswerForm" name="answer-block" method="post">
+                <textarea formControlName="message" name="answer" rows="2" placeholder="Add comment..." maxlength="65535"></textarea>
                 <input type="submit" value="Add">
             </form>
         </div>
 
+        <a class="answers-link" *ngIf="comment.answers_count" (click)="showAnswersList(comment)">Comments ({{ comment.answers_count }}) 
+            <img class="opened" src="assets/images/triangle.png" alt="show answers">
+        </a>
 
         <div *ngIf="answersList" class="answer">
             <app-answer *ngFor="let answer of answersList.data | paginate: paginationConfig" [answer]="answer"></app-answer>
