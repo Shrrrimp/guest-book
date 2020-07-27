@@ -23,8 +23,7 @@ export class CommentComponent implements OnInit {
 
   constructor(public commentsService: CommentsService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   updateComment(comment: Comment) {
     // TODO: поменять на данные из формы
@@ -61,6 +60,9 @@ export class CommentComponent implements OnInit {
     this.commentsService.getAnswersList(comment.id).subscribe((data) => {
       this.answersList = data;
 
+      console.log('list:');
+      console.log(this.answersList);
+
       this.paginationConfig.id = `${comment.id}`;
       this.paginationConfig.currentPage = this.answersList.meta.current_page;
       this.paginationConfig.itemsPerPage = this.answersList.meta.per_page;
@@ -73,6 +75,19 @@ export class CommentComponent implements OnInit {
     this.commentsService.getNextAnswersPage(this.comment.id, $event).subscribe((data) => {
       this.answersList = data;
     });
+  }
+
+  // ToDO: переделать под данные из формы
+  addAnswer() {
+    if (!this.answersList) {
+      this.commentsService.getAnswersList(this.comment.id).subscribe((data) => {
+        this.answersList = data;
+      });
+    }
+
+    this.commentsService.addAnswer(this.comment.id, 'hi, Im answer').subscribe(data => {
+      this.answersList.data.unshift(data);
+    }, err => console.error(err));
   }
 
 }
