@@ -21,6 +21,7 @@ export class CommentComponent implements OnInit {
     totalItems: 0
   };
   public isModalDialogVisible = false;
+  public modalTitle = 'Are you sure?';
   public modalMessage = 'Do you want to delete message?';
 
   constructor(public commentsService: CommentsService) { }

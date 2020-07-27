@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ModalDialogComponent implements OnInit {
 
+  @Input() title: string;
   @Input() message: string;
   @Output() isConfirmed: EventEmitter<boolean> = new EventEmitter<boolean>();
 

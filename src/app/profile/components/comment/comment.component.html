@@ -36,4 +36,4 @@
 
 </li>
 
-<app-modal-dialog *ngIf="isModalDialogVisible" [message]="modalMessage" (isConfirmed)="closeModal($event, comment)"></app-modal-dialog>
+<app-modal-dialog *ngIf="isModalDialogVisible" [title]="modalTitle" [message]="modalMessage" (isConfirmed)="closeModal($event, comment)"></app-modal-dialog>
