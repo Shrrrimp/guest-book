@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommentsService } from '../../services/comments.service';
 import { AuthService } from '../../../auth/services/auth.service';
+import { PusherService } from '../../services/pusher.service';
 
 @Component({
   selector: 'app-main-page',
@@ -13,9 +14,20 @@ export class MainPageComponent implements OnInit {
   public currentUserPic: string;
   public currentUserName: string;
 
-  constructor(public commentsService: CommentsService, private authService: AuthService) { }
+  constructor(public commentsService: CommentsService, private authService: AuthService, private pusherService: PusherService) { }
 
   ngOnInit(): void {
+
+    this.pusherService.echo.channel('posts').listen('PublicPush', e => {
+      console.log('EVENT!!!');
+      console.log(e, 'evvvent!');
+    });
+
+    this.pusherService.echo.private('user.' + this.authService.getCurrentUserId()).listen('UserPush', e => {
+      console.log('USER EVENT!!!');
+      console.log(e, 'userrr evvvent!');
+    });
+
     this.addCommentForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       message: new FormControl('', [Validators.required, Validators.maxLength(65535)])
