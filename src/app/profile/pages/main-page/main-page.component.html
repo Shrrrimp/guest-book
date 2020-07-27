@@ -1,11 +1,25 @@
-<div class="new-entry">
-    <img src="{{ currentUserPic }}" alt="{{ currentUserName }}">
-    <form (ngSubmit)="addComment()" [formGroup]="addCommentForm" name="entry-block" method="post">
-        <input type="text" size="40" placeholder="Title" formControlName="title" maxlength="255">
-        <textarea name="entry" rows="6" placeholder="New entry..." formControlName="message" maxlength="65535"></textarea>
-        <input type="submit" value="Add">
-    </form>
+<div class="book-anim">
+    <img src="assets/images/book_anim.gif" alt="book_animation">
 </div>
+
+<div class="container">
+    <div class="new-entry">
+        <img class="avatar" src="{{ currentUserPic }}" alt="{{ currentUserName }}">
+        <div class="right-block">
+            <form (ngSubmit)="addComment()" [formGroup]="addCommentForm" name="entry-block" method="post">
+                <input type="text" size="40" placeholder="Title" formControlName="title" maxlength="255">
+                <textarea name="entry" rows="6" placeholder="New entry..." formControlName="message" maxlength="65535"></textarea>
+                <input type="submit" value="Add">
+            </form>
+        </div>
+        <!-- <form (ngSubmit)="addComment()" [formGroup]="addCommentForm" name="entry-block" method="post">
+            <input type="text" size="40" placeholder="Title" formControlName="title" maxlength="255">
+            <textarea name="entry" rows="6" placeholder="New entry..." formControlName="message" maxlength="65535"></textarea>
+            <input type="submit" value="Add">
+        </form> -->
+    </div>
+</div>
+
 
 <div class="comments">
     <ul *ngIf="commentsService.commentsList; else noComments">

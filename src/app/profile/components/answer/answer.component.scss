@@ -2,11 +2,6 @@ $blue: #070C27;
 $red: #FF4040;
 $white: #ffffff;
 $gray: #797FA5;
-@font-face {
-    font-family: 'Arial Rounded MT Bold';
-    src: url('src/assets/fonts/ARLRDBD.ttf');
-}
-
 .answer {
     margin-top: 40px;
 }
@@ -25,7 +20,7 @@ $gray: #797FA5;
     vertical-align: top;
     margin-left: 40px;
     .info {
-        font-family: Arial Rounded MT Bold;
+        font-family: Arial;
         font-style: normal;
         font-weight: bold;
         width: fit-content;

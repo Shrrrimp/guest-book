@@ -2,11 +2,6 @@ $blue: #070C27;
 $red: #FF4040;
 $white: #ffffff;
 $gray: #797FA5;
-@font-face {
-    font-family: 'Arial Rounded MT Bold';
-    src: url('src/assets/fonts/ARLRDBD.ttf');
-}
-
 header {
     width: 100%;
     height: 70px;
@@ -16,7 +11,7 @@ header {
     h2 {
         margin: auto;
         margin-left: 38px;
-        font-family: Arial Rounded MT Bold;
+        font-family: Arial;
         font-style: normal;
         font-weight: bold;
         font-size: 36px;
@@ -26,18 +21,35 @@ header {
     .links {
         margin: auto;
         margin-right: 40px;
+        // width: 110px;
         a {
-            margin: auto;
-            // margin-right: 40px;
+            // margin: auto;
+            display: inline-block;
+            vertical-align: middle;
+            width: fit-content;
+            height: fit-content;
+            .notific {
+                width: 30px;
+                height: 30px;
+                margin-top: 10px;
+            }
+            .alert {
+                position: relative;
+                left: 17px;
+                bottom: 15px;
+                z-index: 1;
+                margin: 0;
+                width: 12px;
+                height: 12px;
+                background: $red;
+                border-radius: 100px;
+                // border: 1px solid $white;
+            }
             .avatar {
+                margin-left: 40px;
                 width: 40px;
                 height: 40px;
                 border-radius: 100px;
-            }
-            .notific {
-                margin-right: 40px;
-                width: 40px;
-                height: 40px;
             }
         }
     }

@@ -17,11 +17,23 @@
             <p class="text"> {{ comment.message }}</p>
         </div>
 
+        // vladis
         <button (click)=addAnswer()>add answer</button>
+        // vladis
 
         <a class="answers-link" *ngIf="comment.answers_count" (click)="showAnswersList(comment)">Comments ({{ comment.answers_count }}) 
             <img class="opened" src="assets/images/triangle.png" alt="show answers">
         </a>
+
+
+        <div class="add-answer">
+            <img src="assets/images/no_avatar.png" alt="">
+            <form name="answer-block" method="post">
+                <textarea name="answer" rows="2" placeholder="Add comment..." maxlength="65535"></textarea>
+                <input type="submit" value="Add">
+            </form>
+        </div>
+
 
         <div *ngIf="answersList" class="answer">
             <app-answer *ngFor="let answer of answersList.data | paginate: paginationConfig" [answer]="answer"></app-answer>

@@ -1,9 +1,10 @@
 <div class="modal-background">
     <div class="modal-container">
-        <h2>{{ message }}</h2>
+        <h2>Are you sure?</h2>
+        <p>{{ message }}</p>
         <div class="action-block">
-            <button class="simple-button" (click)="confirm()">Ok</button>
-            <button class="simple-button" (click)="close()">Cancel</button>
+            <button class="delete" (click)="confirm()">Delete</button>
+            <button class="cancel" (click)="close()">Cancel</button>
         </div>
     </div>
 </div>
