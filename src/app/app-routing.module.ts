@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ErrorPageComponent } from './shared/error-page/error-page.component';
 
 
 const routes: Routes = [
@@ -9,8 +10,8 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
   },
-  { path: 'login', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  { path: 'registration', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  { path: '**', component: ErrorPageComponent }
 ];
 
 @NgModule({
