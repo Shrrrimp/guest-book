@@ -10,8 +10,10 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
-  form: FormGroup;
-  isDataInvalid = false;
+  public form: FormGroup;
+  public isDataInvalid = false;
+  public isEmailInvalid = false;
+  public isPasswordInvalid = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -31,7 +33,14 @@ export class LoginPageComponent implements OnInit {
       this.authService.logIn(this.login.value, this.password.value).subscribe((data) => {
         this.router.navigate(['/home']);
 
-      }, err => this.isDataInvalid = true);
+      }, (err) => {
+        this.isDataInvalid = true;
+        this.isEmailInvalid = false;
+        this.isPasswordInvalid = false;
+      });
+    } else {
+      this.login.errors ? this.isEmailInvalid = true : this.isEmailInvalid = false;
+      this.password.errors ? this.isPasswordInvalid = true : this.isPasswordInvalid = false;
     }
   }
 

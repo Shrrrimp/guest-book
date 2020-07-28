@@ -10,48 +10,19 @@
                 <p>Email</p>
 
                <div *ngIf="login.errors" class="error">
-                <p   *ngIf="login.errors.email" >
+                <p  *ngIf="login.errors.email" >
                     Invalid email
                 </p>
                </div>
             </div>
-
-                <!-- <p *ngIf="login.errors.required" class="error">
-                    Email is required
-                </p> -->
-
-            <input class="required" type="text" formControlName="login" required>
+            <input [class.required]="isEmailInvalid" type="text" formControlName="login" required>
         </label>
         <label>
             <div  class="titles">
                 <p>Password</p> 
-              <!-- <p *ngIf="password.errors" class="error">Password is required</p> -->
             </div>
-            <input type="password" formControlName="password" required>
+            <input [class.required]="isPasswordInvalid" type="password" formControlName="password" required>
         </label>
         <button class="login-btn" type="submit">Login</button>
-
-
-
     </form>
-
-    <!-- 
-    <div *ngIf="login.errors">
-        <div *ngIf="login.errors.email">
-            Invalid email
-        </div>
-        <div *ngIf="login.errors.required">
-            email is required
-        </div>
-    </div> -->
-
-    <!-- <div *ngIf="password.errors">
-        password is required
-    </div> -->
-
-    <!-- 
-    <div *ngIf="isDataInvalid">
-        Wrong email or password!
-    </div> -->
-
 </div>
