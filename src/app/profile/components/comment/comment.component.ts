@@ -21,6 +21,7 @@ export class CommentComponent implements OnInit {
     totalItems: 0
   };
   public isModalDialogVisible = false;
+  public isEditDialogVisible = false;
   public modalTitle = 'Are you sure?';
   public modalMessage = 'Do you want to delete message?';
 
@@ -56,11 +57,20 @@ export class CommentComponent implements OnInit {
     this.isModalDialogVisible = true;
   }
 
+  showEditModal() {
+    this.isEditDialogVisible = true;
+  }
+
   closeModal($event: boolean, comment: Comment) {
     this.isModalDialogVisible = false;
     if ($event) {
       this.deleteComment(comment);
     }
+  }
+
+  closeEditModal($event: boolean, comment: Comment) {
+    this.isEditDialogVisible = false;
+    //TODO: дописать логику
   }
 
   showAnswersList(comment: Comment) {
