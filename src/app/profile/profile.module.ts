@@ -8,7 +8,8 @@ import { CommentComponent } from './components/comment/comment.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { EditCommentDialogComponent } from './components/edit-comment-dialog/edit-comment-dialog.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EditCommentDialogComponent } from './components/edit-comment-dialog/edi
     ProfileRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FontAwesomeModule
   ]
 })
 export class ProfileModule { }

@@ -25,11 +25,11 @@
             </form>
         </div>
 
-        <a class="answers-link" *ngIf="comment.answers_count" (click)="showAnswersList(comment)">Comments ({{ comment.answers_count }}) 
-            <img class="opened" src="assets/images/triangle.png" alt="show answers">
+        <a class="answers-link" *ngIf="comment.answers_count" (click)="toggle(comment)">Comments ({{ comment.answers_count }}) 
+            <fa-icon [icon]="faCaretUp" rotate="{{ arrowAngle }}" size="2x" transform="down-4"></fa-icon>
         </a>
 
-        <div *ngIf="answersList" class="answer">
+        <div *ngIf="answersList && isAnswersListVisible" class="answer">
             <app-answer *ngFor="let answer of answersList.data | paginate: paginationConfig" [answer]="answer" [currentUser]="currentUser"></app-answer>
             <pagination-controls (pageChange)="onPageChange($event)" [id]="comment.id"></pagination-controls>
         </div>
