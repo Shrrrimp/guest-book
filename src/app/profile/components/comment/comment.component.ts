@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Comment } from '../../models/comment.model';
 import { CommentsService } from '../../services/comments.service';
 import { AnswersList } from '../../models/answer.model';
+import { User } from '../../models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-comment',
@@ -12,8 +14,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class CommentComponent implements OnInit {
 
   @Input() public comment: Comment | undefined;
+  @Input() public currentUser: User | null;
   public addAnswerForm: FormGroup;
   public answersList: AnswersList | null;
+
   public paginationConfig = {
     id: '',
     itemsPerPage: 0,

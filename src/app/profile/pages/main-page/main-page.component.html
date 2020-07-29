@@ -18,7 +18,7 @@
 
 <div class="comments">
     <ul *ngIf="commentsService.commentsList; else noComments">
-        <app-comment *ngFor="let comment of commentsService.commentsList.data" [comment]="comment"></app-comment>
+        <app-comment *ngFor="let comment of commentsService.commentsList.data" [comment]="comment" [currentUser]="currentUser"></app-comment>
     </ul>
 
     <ng-template #noComments>

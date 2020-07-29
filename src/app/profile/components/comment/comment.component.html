@@ -6,7 +6,7 @@
             <div class="date">{{comment.created_at}}</div><br>
             <a href="mailto:{{ comment.user.email }}" class="email">{{ comment.user.email }}</a>
         </div>
-        <div class="buttons">
+        <div *ngIf="currentUser.is_admin || currentUser.id == comment.user.id" class="buttons">
             <!-- <button (click)="updateComment(comment)"><img src="assets/images/pen.png" alt="edit"></button> -->
             <button (click)="showEditModal()"><img src="assets/images/pen.png" alt="edit"></button>
             <button (click)="showModal()"><img src="assets/images/trash-can.png" alt="delete"></button>
@@ -17,7 +17,7 @@
             <p class="text"> {{ comment.message }}</p>
         </div>
 
-        <div class="add-answer">
+        <div *ngIf="currentUser.is_admin || currentUser.id == comment.user.id" class="add-answer">
             <img src="assets/images/no_avatar.png" alt="">
             <form (ngSubmit)="addAnswer()" [formGroup]="addAnswerForm" name="answer-block" method="post">
                 <textarea formControlName="message" name="answer" rows="2" placeholder="Add comment..." maxlength="65535"></textarea>
@@ -30,7 +30,7 @@
         </a>
 
         <div *ngIf="answersList" class="answer">
-            <app-answer *ngFor="let answer of answersList.data | paginate: paginationConfig" [answer]="answer"></app-answer>
+            <app-answer *ngFor="let answer of answersList.data | paginate: paginationConfig" [answer]="answer" [currentUser]="currentUser"></app-answer>
             <pagination-controls (pageChange)="onPageChange($event)" [id]="comment.id"></pagination-controls>
         </div>
     </div>

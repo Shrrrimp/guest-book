@@ -6,7 +6,7 @@
             <div class="date">{{answer.created_at}}</div><br>
             <a href="mailto:{{ answer.user.email }}" class="email">{{ answer.user.email }}</a>
         </div>
-        <div class="buttons">
+        <div *ngIf="currentUser.is_admin || answer.user_id == currentUser.id" class="buttons">
             <button><img src="assets/images/pen.png" alt="edit"></button>
             <button><img src="assets/images/trash-can.png" alt="delete"></button>
         </div>
