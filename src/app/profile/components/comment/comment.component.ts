@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Comment } from '../../models/comment.model';
 import { CommentsService } from '../../services/comments.service';
 import { AnswersList } from '../../models/answer.model';
+import { User } from '../../models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-comment',
@@ -12,8 +14,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class CommentComponent implements OnInit {
 
   @Input() public comment: Comment | undefined;
+  @Input() public currentUser: User | null;
   public addAnswerForm: FormGroup;
   public answersList: AnswersList | null;
+
+  public faCaretUp = faCaretUp;
+  public isAnswersListVisible = false;
+  public arrowAngle = 180;
   public paginationConfig = {
     id: '',
     itemsPerPage: 0,
@@ -85,6 +92,20 @@ export class CommentComponent implements OnInit {
       this.paginationConfig.itemsPerPage = this.answersList.meta.per_page;
       this.paginationConfig.totalItems = this.answersList.meta.total;
     }, err => console.error(err));
+  }
+
+  toggle(comment: Comment) {
+    if (this.isAnswersListVisible) {
+      this.isAnswersListVisible = false;
+      this.arrowAngle = 180;
+    } else {
+      this.isAnswersListVisible = true;
+      this.arrowAngle = 0;
+
+      if (!this.answersList) {
+        this.showAnswersList(comment);
+      }
+    }
   }
 
   onPageChange($event) {

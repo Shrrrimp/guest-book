@@ -1,20 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommentsService } from '../../services/comments.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { PusherService } from '../../services/pusher.service';
+import { User } from '../../models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit, OnDestroy {
   public addCommentForm: FormGroup;
   public currentUserPic: string;
-  public currentUserName: string;
+  ////////////////////////////////////////////////
+  currentUser: User;
+  currentUserSubscription: Subscription;
 
-  constructor(public commentsService: CommentsService, private authService: AuthService, private pusherService: PusherService) { }
+  constructor(
+    public commentsService: CommentsService,
+    private authService: AuthService,
+    private pusherService: PusherService
+    ) {
+      this.currentUserSubscription = this.authService.currentUser.subscribe(user => {
+        this.currentUser = user.user;
+      });
+    }
 
   ngOnInit(): void {
 
@@ -23,7 +35,7 @@ export class MainPageComponent implements OnInit {
       console.log(e, 'evvvent!');
     });
 
-    this.pusherService.echo.private('user.' + this.authService.getCurrentUserId()).listen('UserPush', e => {
+    this.pusherService.echo.private('user.' + this.currentUser.id.toString()).listen('UserPush', e => {
       console.log('USER EVENT!!!');
       console.log(e, 'userrr evvvent!');
     });
@@ -39,8 +51,6 @@ export class MainPageComponent implements OnInit {
     // this.authService.getCurrentUserPic().subscribe(data => {
     //   this.currentUserPic = data;
     // }, err => console.error(err));
-
-    this.currentUserName = this.authService.getCurrentUserName();
 
     this.commentsService.getCommentsList().subscribe((data) => {
       this.commentsService.commentsList = data;
@@ -62,6 +72,10 @@ export class MainPageComponent implements OnInit {
         this.addCommentForm.reset();
       }, err => console.error(err));
     }
+  }
+
+  ngOnDestroy() {
+    this.currentUserSubscription.unsubscribe();
   }
 
 }
