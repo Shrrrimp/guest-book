@@ -3,17 +3,17 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PusherService {
-  // pusher: Pusher;
-  channel: any;
   echo: Echo;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
+    const currentUser = this.authService.currentUserValue;
 
     Pusher.logToConsole = true;
 
@@ -28,7 +28,7 @@ export class PusherService {
       authEndpoint: 'https://guest-book.naveksoft.com/broadcasting/auth',
       auth: {
         headers: {
-          Authorization: `Bearer ${localStorage.token}`,
+          Authorization: `Bearer ${currentUser.token.access_token}`,
           Accept: `application/json`
         },
       },
