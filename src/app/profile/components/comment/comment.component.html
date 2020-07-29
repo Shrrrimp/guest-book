@@ -3,7 +3,7 @@
     <div class="right-block">
         <div class="info">
             <h4>{{ comment.user.name }}</h4>
-            <div class="date">{{comment.created_at}}</div><br>
+            <div class="date">{{comment.created_at | date:"dd.MM.yyyy"}}</div><br>
             <a href="mailto:{{ comment.user.email }}" class="email">{{ comment.user.email }}</a>
         </div>
         <div *ngIf="currentUser.is_admin || currentUser.id == comment.user.id" class="buttons">
