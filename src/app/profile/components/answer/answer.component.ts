@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Answer } from '../../models/answer.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-answer',
@@ -8,7 +9,8 @@ import { Answer } from '../../models/answer.model';
 })
 export class AnswerComponent implements OnInit {
 
-  @Input() public answer: Answer | undefined;
+  @Input() public answer: Answer | null;
+  @Input() public currentUser: User | null;
 
   constructor() { }
 

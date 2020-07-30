@@ -1,5 +1,5 @@
 <div class="reg-form">
-    <form>
+    <form (ngSubmit)="submit()" [formGroup]="form">
         <h2>Registration form</h2>
         <!-- <div class="wrong-data">
             Wrong email or password!
@@ -8,50 +8,42 @@
         <img src="assets/images/no_avatar.png" class="avatar">
         <label>
                 <div class="titles">
-                 <p>Profile Image</p>
+                 <p>Profile Image {{ imageName }}</p>
                 </div>
                 </label>
         <!-- <input type="text" class="text-input" size="50"> -->
-        <span class="select-img">
-         <!-- <input type="button" name="submit" class="img-add-btn" value="Select image"> -->
-         <!-- <input type="file" class="img-select" name="picture"> -->
-
-         <div class="fl_upld">
-            <label><input id="fl_inp" type="file" name="file">Select image</label>
-            <!-- <div id="fl_nm">Файл не выбран</div> -->
-        </div>
+        <span>
+         <input type="file" style="display: none" (change)="onFileSelected($event)" #fileInput>
+         <input type="button" name="submit" (click)="fileInput.click()" class="img-add-btn" value="Select image">
 
          <input type="button" name="submit" class="img-add-btn"  id="delete" value="&times;">
         </span>
-
-
 
         <label>
             <div  class="titles">
                 <p>Name</p> 
             </div>
-            <input type="text" class="text-input"  required>
+            <input type="text" class="text-input" formControlName="name" maxlength="255"  required>
         </label>
         <label>
             <div  class="text">
                 <p>Email</p> 
             </div>
-            <input type="password" class="text-input"  required>
+            <input type="text" class="text-input" formControlName="login" maxlength="255"  required>
         </label>
         <label>
             <div  class="titles">
                 <p>Password</p> 
             </div>
-            <input type="password" class="text-input"  required>
+            <input type="password" class="text-input" formControlName="password" maxlength="255" minlength="8" required>
         </label>
         <label>
             <div  class="titles">
                 <p>Password confirmation </p> 
             </div>
-            <input type="password" class="text-input"  required>
+            <input type="password" class="text-input" formControlName="passwordConfirm" maxlength="255" minlength="8" required>
         </label>
         <button class="reg-btn" type="submit">Register</button>
         <a class="reg-link" href="">Log in</a>
     </form>
-
 </div>

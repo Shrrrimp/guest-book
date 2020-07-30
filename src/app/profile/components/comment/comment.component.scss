@@ -159,6 +159,7 @@ li {
         font-size: 14px;
         line-height: 21px;
         color: $blue;
+        user-select: none;
     }
     .opened {
         transform: scale(1, -1);
