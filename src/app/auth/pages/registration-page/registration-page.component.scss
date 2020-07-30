@@ -28,21 +28,6 @@ $gray: #797FA5;
             height: 100px;
             border-radius: 100px;
         }
-        // .wrong-data {
-        //     margin-top: 20px;
-        //     display: flex;
-        //     justify-content: center;
-        //     align-items: center;
-        //     font-family: Arial;
-        //     font-style: normal;
-        //     font-weight: bold;
-        //     color: $red;
-        //     font-size: 12px;
-        //     height: 40px;
-        //     background: $white;
-        //     border: 1px solid $red;
-        //     border-radius: 5px;
-        // }
     }
     label {
         .titles {
@@ -81,9 +66,9 @@ $gray: #797FA5;
         box-shadow: 0px 0px 5px $red;
     }
     .reg-btn {
-        margin: 20px 0 0 auto;
-        padding: 8px 0;
-        width: 120px;
+        height: 35px;
+        margin-top: 20px;
+        width: 100%;
         color: $white;
         border-radius: 5px;
         border: none;
@@ -92,10 +77,21 @@ $gray: #797FA5;
         font-style: normal;
         font-weight: bold;
     }
+    .reg-link {
+        color: $gray;
+        font-family: Arial;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        text-transform: uppercase;
+    }
+    .reg-link:hover {
+        cursor: pointer;
+        color: $blue;
+    }
     .img-add-btn {
-        margin: 0 0 0 auto;
         padding: 8px 0;
-        width: 120px;
         color: $blue;
         border-radius: 5px;
         border: none;
@@ -104,8 +100,36 @@ $gray: #797FA5;
         font-style: normal;
         font-weight: bold;
     }
+    .select-img {
+        display: flex;
+        flex-direction: row;
+    }
+    .fl_upld {
+        width: 120px;
+    }
+    #fl_inp {
+        display: none;
+    }
+    .fl_upld label {
+        margin: 0 0 0 auto;
+        cursor: pointer;
+        background: $gray;
+        border-radius: 5px;
+        padding: 10px 0;
+        color: $blue;
+        text-align: center;
+        font-family: Arial;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+    }
+    .fl_upld label:hover {
+        cursor: pointer;
+        filter: brightness(60%);
+    }
     #delete {
         width: 40px;
+        margin-left: 5px;
     }
     .reg-btn:hover {
         cursor: pointer;

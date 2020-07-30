@@ -15,10 +15,9 @@
         <span>
          <input type="file" style="display: none" (change)="onFileSelected($event)" #fileInput>
          <input type="button" name="submit" (click)="fileInput.click()" class="img-add-btn" value="Select image">
+
          <input type="button" name="submit" class="img-add-btn"  id="delete" value="&times;">
         </span>
-
-
 
         <label>
             <div  class="titles">
@@ -45,5 +44,6 @@
             <input type="password" class="text-input" formControlName="passwordConfirm" maxlength="255" minlength="8" required>
         </label>
         <button class="reg-btn" type="submit">Register</button>
+        <a class="reg-link" href="">Log in</a>
     </form>
 </div>
