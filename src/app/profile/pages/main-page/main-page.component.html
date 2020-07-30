@@ -18,7 +18,13 @@
 
 <div class="comments">
     <ul *ngIf="commentsService.commentsList; else noComments">
-        <app-comment *ngFor="let comment of commentsService.commentsList.data" [comment]="comment" [currentUser]="currentUser"></app-comment>
+        <app-comment *ngFor="let comment of commentsService.commentsList.data | paginate: paginationConfig" [comment]="comment" [currentUser]="currentUser"></app-comment>
+        <pagination-controls 
+            class="my-pagination" 
+            [previousLabel]="'prev'"
+            [nextLabel]="'next'" 
+            (pageChange)="onPageChange($event)">
+        </pagination-controls>
     </ul>
 
     <ng-template #noComments>

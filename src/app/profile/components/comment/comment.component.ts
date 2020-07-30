@@ -112,6 +112,7 @@ export class CommentComponent implements OnInit {
     this.paginationConfig.currentPage = $event;
     this.commentsService.getNextAnswersPage(this.comment.id, $event).subscribe((data) => {
       this.answersList = data;
+      this.paginationConfig.totalItems = this.answersList.meta.total;
     });
   }
 
@@ -125,8 +126,12 @@ export class CommentComponent implements OnInit {
     }
 
     this.commentsService.addAnswer(this.comment.id, this.message.value).subscribe(data => {
-      this.answersList.data.unshift(data);
+      if (this.paginationConfig.currentPage === this.answersList.meta.last_page) {
+        this.answersList.data.push(data);
+      }
+
       ++this.comment.answers_count;
+      this.addAnswerForm.reset();
     }, err => console.error(err));
   }
 

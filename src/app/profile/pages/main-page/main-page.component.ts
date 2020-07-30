@@ -15,8 +15,14 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public addCommentForm: FormGroup;
   public currentUserPic: string;
   ////////////////////////////////////////////////
-  currentUser: User;
-  currentUserSubscription: Subscription;
+  public currentUser: User;
+  private currentUserSubscription: Subscription;
+
+  public paginationConfig = {
+    itemsPerPage: 0,
+    currentPage: 0,
+    totalItems: 0
+  };
 
   constructor(
     public commentsService: CommentsService,
@@ -58,6 +64,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
       console.log('comments:');
       console.log(this.commentsService.commentsList);
 
+      this.paginationConfig.currentPage = this.commentsService.commentsList.meta.current_page;
+      this.paginationConfig.itemsPerPage = this.commentsService.commentsList.meta.per_page;
+      this.paginationConfig.totalItems = this.commentsService.commentsList.meta.total;
+
     }, err => console.error(err));
   }
 
@@ -68,10 +78,21 @@ export class MainPageComponent implements OnInit, OnDestroy {
   addComment() {
     if (this.addCommentForm.valid) {
       this.commentsService.addComment(this.title.value, this.message.value).subscribe(data => {
-        this.commentsService.commentsList.data.unshift(data);
+        if (this.paginationConfig.currentPage === 1) {
+          this.commentsService.commentsList.data.unshift(data);
+        }
         this.addCommentForm.reset();
       }, err => console.error(err));
     }
+  }
+
+  onPageChange($event) {
+    this.paginationConfig.currentPage = $event;
+
+    this.commentsService.getNextCommentsPage($event).subscribe((data) => {
+      this.commentsService.commentsList = data;
+      this.paginationConfig.totalItems = this.commentsService.commentsList.meta.total;
+    });
   }
 
   ngOnDestroy() {
