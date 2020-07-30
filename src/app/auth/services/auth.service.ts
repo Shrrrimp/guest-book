@@ -33,7 +33,18 @@ export class AuthService {
           this.currentUserSubject.next(data);
         }
         return data;
-      }));
+    }));
+  }
+
+  public register(avatar, email: string, name: string, password: string, password_confirmation: string): Observable<User> {
+    return this.http.post<User>(this.baseUrl + 'api/v1/auth/register', {avatar, email, name, password, password_confirmation})
+      .pipe(map(data => {
+        if (data) {
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          this.currentUserSubject.next(data);
+        }
+        return data;
+    }));
   }
 
   // TODO: пересмотреть метод
