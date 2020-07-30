@@ -1,0 +1,107 @@
+$blue: #070C27;
+$red: #FF4040;
+$white: #ffffff;
+$gray: #797FA5;
+.modal-background {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.edit {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 40px;
+    form {
+        width: 580px;
+        input[type=text] {
+            width: 100%;
+            height: 40px;
+            border: 0;
+            background: $white;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            padding-left: 40px;
+            padding-right: 40px;
+            font-family: Arial;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+        }
+        textarea {
+            width: 100%;
+            border: 0;
+            border-radius: 5px;
+            background-color: $white;
+            resize: none;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+            font-family: Arial;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            padding-left: 40px;
+            padding-top: 20px;
+            padding-right: 40px;
+            margin-top: 20px;
+        }
+        input[type=text]::placeholder {
+            color: $gray;
+        }
+        textarea::placeholder {
+            color: $gray;
+        }
+        input[type=text]:focus::placeholder {
+            color: transparent
+        }
+        textarea:focus::placeholder {
+            color: transparent
+        }
+        button:hover {
+            outline: 0;
+            outline-offset: 0;
+            filter: brightness(60%);
+        }
+        .edit-btn {
+            margin-top: 20px;
+            cursor: pointer;
+            width: 130px;
+            height: 40px;
+            background-color: $blue;
+            border: none;
+            border-radius: 5px;
+            font-family: Arial;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            color: $white;
+        }
+        .cancel-btn {
+            margin-top: 20px;
+            cursor: pointer;
+            width: 130px;
+            height: 40px;
+            background-color: $red;
+            border: none;
+            border-radius: 5px;
+            font-family: Arial;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            color: $white;
+            margin-left: 10px;
+        }
+    }
+    form:active,
+     :hover,
+     :focus {
+        outline: 0;
+        outline-offset: 0;
+    }
+}

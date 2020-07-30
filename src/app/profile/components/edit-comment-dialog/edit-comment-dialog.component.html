@@ -1,3 +1,14 @@
-<p>edit-comment-dialog works!</p>
-<button class="delete" (click)="confirm()">Edit</button>
-<button class="cancel" (click)="close()">Cancel</button>
+<div class="modal-background">
+
+    <div class="edit">
+        <form name="entry-block" method="post">
+            <input type="text" size="40" placeholder="Title" formControlName="title" maxlength="255" value="diojdijd">
+            <textarea name="entry" rows="6" placeholder="Your entry..." formControlName="message" maxlength="65535">fyufffffffff</textarea>
+
+            <button class="edit-btn" (click)="confirm()">Edit</button>
+            <button class="cancel-btn" (click)="close()">Cancel</button>
+        </form>
+    </div>
+
+
+</div>

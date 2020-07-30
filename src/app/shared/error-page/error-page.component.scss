@@ -15,7 +15,6 @@ $gray: #797FA5;
         h2 {
             text-transform: uppercase;
             font-family: Arial;
-            // font-size: 50px;
             font-weight: bold;
             color: $red;
         }
@@ -26,15 +25,13 @@ $gray: #797FA5;
         }
         .book-anim {
             margin-top: 120px;
-            // text-align: center;
         }
         .home-link {
             margin-top: 40px;
             cursor: pointer;
-            // width: 300px;
             .go-home {
                 height: 40px;
-                padding: 10px 100px;
+                padding: 20px 120px;
                 background-color: $blue;
                 border: none;
                 border-radius: 5px;
