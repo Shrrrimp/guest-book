@@ -118,3 +118,10 @@ $gray: #797FA5;
     margin-top: 40px;
     width: 100%;
 }
+
+.my-pagination::ng-deep .ngx-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    background: #070c27 !important;
+    color: #ffffff;
+    cursor: default;
+}
