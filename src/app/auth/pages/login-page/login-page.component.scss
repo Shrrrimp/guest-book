@@ -74,10 +74,24 @@ $gray: #797FA5;
     .required {
         box-shadow: 0px 0px 5px $red;
     }
+    .reg-link {
+        color: $gray;
+        font-family: Arial;
+        // font-weight: bold;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        text-transform: uppercase;
+    }
+    .reg-link:hover {
+        cursor: pointer;
+        color: $blue;
+    }
     .login-btn {
-        margin: 20px 0 0 auto;
-        padding: 8px 0;
-        width: 120px;
+        height: 35px;
+        margin-top: 20px;
+        width: 100%;
         color: $white;
         border-radius: 5px;
         border: none;
