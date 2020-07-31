@@ -3,9 +3,7 @@
 
     <div class="links">
         <div class="user">
-            <!-- <img class="ava" src="assets/images/ava.png" alt="no_avatar"> -->
-            <!-- <img class="ava" src="{{ currentUserPic }}" alt="no_avatar"> -->
-            <img class="ava" src="{{ currentUser.avatar }}" alt="no_avatar">
+            <img class="ava" [src]="utilsService.getAvatar(currentUser.avatar)" onError="this.src='assets/images/no_avatar.png'" alt="{{ currentUser.name }}">
             <h5 class="name">{{ currentUser.name }}</h5>
         </div>
         <a class="notific" href="#">

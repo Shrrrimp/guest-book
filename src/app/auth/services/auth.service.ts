@@ -16,7 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
-   }
+  }
 
    public get currentUserValue(): User {
     return this.currentUserSubject.value;
@@ -44,26 +44,6 @@ export class AuthService {
           this.currentUserSubject.next(data);
         }
         return data;
-    }));
-  }
-
-  // TODO: пересмотреть метод
-  public getCurrentUserPic(): Observable<any> {
-    console.log('user:');
-    console.log(this.currentUserValue);
-
-    // const headers = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.token}` });
-    // const options = { headers: headers };
-    // return this.http.get(this.currentUserValue.user.avatar, options).pipe(map(data => {
-    //   console.log('data');
-    //   console.log(data);
-    // }));
-
-    // const headers = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.token}` });
-    // const options = { headers: headers };
-    return this.http.get(this.currentUserValue.user.avatar).pipe(map(data => {
-      console.log('data');
-      console.log(data);
     }));
   }
 

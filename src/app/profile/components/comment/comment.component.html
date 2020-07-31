@@ -1,5 +1,5 @@
 <li class="comment">
-    <img class="avatar" src="assets/images/no_avatar.png" alt="{{ comment.user.name }}">
+    <img class="avatar" [src]="utilsService.getAvatar(comment.user.avatar)" onError="this.src='assets/images/no_avatar.png'" [alt]="comment.user.name">
     <div class="right-block">
         <div class="info">
             <h4>{{ comment.user.name }}</h4>
@@ -18,7 +18,7 @@
         </div>
 
         <div *ngIf="currentUser.is_admin || currentUser.id == comment.user.id" class="add-answer">
-            <img src="assets/images/no_avatar.png" alt="">
+            <img [src]="utilsService.getAvatar(currentUser.avatar)" onError="this.src='assets/images/no_avatar.png'" alt="">
             <form (ngSubmit)="addAnswer()" [formGroup]="addAnswerForm" name="answer-block" method="post">
                 <textarea formControlName="message" name="answer" rows="2" placeholder="Add comment..." maxlength="65535"></textarea>
                 <input type="submit" value="Add">
