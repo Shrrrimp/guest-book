@@ -199,7 +199,8 @@ li {
         font-family: Arial;
         font-weight: normal;
         color: $blue;
-        padding: 0.5rem 0.7rem;
+        // padding: 0.5rem 0.7rem;
+        padding: 0;
     }
     li:active,
      :hover,
@@ -215,11 +216,16 @@ li {
     display: block;
     padding: 0;
     border-radius: 0;
+    padding: 0.5rem 0.7rem;
 }
 
 .my-pagination::ng-deep .ngx-pagination a:hover,
 .my-pagination::ng-deep .ngx-pagination button:hover {
     background-color: $gray;
+}
+
+.my-pagination::ng-deep .ngx-pagination .disabled {
+    padding: 0.5rem 0.7rem;
 }
 
 .my-pagination::ng-deep .ngx-pagination li:hover {
