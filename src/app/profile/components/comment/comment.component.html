@@ -31,7 +31,7 @@
 
         <div *ngIf="answersList && isAnswersListVisible" class="answer">
             <app-answer *ngFor="let answer of answersList.data | paginate: paginationConfig" [answer]="answer" [currentUser]="currentUser"></app-answer>
-            <pagination-controls class="my-pagination" [previousLabel]="'prev'" [nextLabel]="'next'" (pageChange)="onPageChange($event)" [id]="comment.id">
+            <pagination-controls *ngIf="paginationConfig.totalItems > paginationConfig.itemsPerPage" class="my-pagination" [previousLabel]="'prev'" [nextLabel]="'next'" (pageChange)="onPageChange($event)" [id]="comment.id">
             </pagination-controls>
         </div>
     </div>
