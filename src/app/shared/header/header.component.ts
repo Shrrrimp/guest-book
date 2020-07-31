@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   public currentUser: User;
   private currentUserSubscription: Subscription;
+  public currentUserPic;
 
   constructor(private authService: AuthService) {
     this.currentUserSubscription = this.authService.currentUser.subscribe(user => {
@@ -19,6 +20,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
+    // this.authService.getCurrentUserPic().subscribe(data => {
+    //   this.currentUserPic = data;
+    // }, err => console.error(err));
   }
 
   ngOnDestroy() {

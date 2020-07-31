@@ -36,8 +36,8 @@ export class AuthService {
     }));
   }
 
-  public register(avatar, email: string, name: string, password: string, password_confirmation: string): Observable<User> {
-    return this.http.post<User>(this.baseUrl + 'api/v1/auth/register', {avatar, email, name, password, password_confirmation})
+  public register(fd: FormData): Observable<User> {
+    return this.http.post<User>(this.baseUrl + 'api/v1/auth/register', fd)
       .pipe(map(data => {
         if (data) {
           localStorage.setItem('currentUser', JSON.stringify(data));
@@ -52,9 +52,16 @@ export class AuthService {
     console.log('user:');
     console.log(this.currentUserValue);
 
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.token}` });
-    const options = { headers: headers };
-    return this.http.get(this.currentUserValue.user.avatar, options).pipe(map(data => {
+    // const headers = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.token}` });
+    // const options = { headers: headers };
+    // return this.http.get(this.currentUserValue.user.avatar, options).pipe(map(data => {
+    //   console.log('data');
+    //   console.log(data);
+    // }));
+
+    // const headers = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.token}` });
+    // const options = { headers: headers };
+    return this.http.get(this.currentUserValue.user.avatar).pipe(map(data => {
       console.log('data');
       console.log(data);
     }));

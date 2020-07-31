@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class RegistrationPageComponent implements OnInit {
 
   public form: FormGroup;
-  public selectedFile = null;
+  public selectedFile: File = null;
   public imgUrl = 'assets/images/no_avatar.png';
   public errors = [];
   public isPasswordInvalid = false;
@@ -62,15 +62,15 @@ export class RegistrationPageComponent implements OnInit {
 
   submit() {
     if (this.isPasswordConfirmed() && this.form.valid) {
-      // TODO: не загружается картинка
-      this.authService.register(
-        this.selectedFile,
-        this.login.value,
-        this.name.value,
-        this.password.value,
-        this.passwordConfirm.value).subscribe((data) => {
-        this.router.navigate(['/home']);
+      const fd = new FormData();
+      fd.append('avatar', this.selectedFile, this.selectedFile.name);
+      fd.append('email', this.login.value);
+      fd.append('name', this.name.value);
+      fd.append('password', this.password.value);
+      fd.append('password_confirmation', this.passwordConfirm.value);
 
+      this.authService.register(fd).subscribe((data) => {
+        this.router.navigate(['/home']);
       }, (err) => {
         this.isEmailInvalid = false;
         this.isPasswordInvalid = false;
@@ -80,8 +80,6 @@ export class RegistrationPageComponent implements OnInit {
         for (let key in err.error.errors) {
           this.errors.push(err.error.errors[key]);
         }
-
-        console.log(err.error);
       });
     } else {
       this.login.errors ? this.isEmailInvalid = true : this.isEmailInvalid = false;
