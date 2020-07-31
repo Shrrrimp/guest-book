@@ -165,3 +165,64 @@ li {
         transform: scale(1, -1);
     }
 }
+
+.my-pagination::ng-deep .ngx-pagination {
+    margin-left: auto;
+    margin-right: 0;
+    width: fit-content;
+    padding: 0;
+}
+
+.my-pagination::ng-deep .ngx-pagination .current {
+    padding: 0.5rem 0.7rem;
+    background: $blue !important;
+    color: $white;
+    cursor: default;
+    font-weight: normal;
+}
+
+.my-pagination::ng-deep .ngx-pagination .pagination-previous a::before,
+.my-pagination::ng-deep .ngx-pagination .pagination-previous.disabled::before {
+    content: none;
+}
+
+.my-pagination::ng-deep .ngx-pagination .pagination-next a::after,
+.my-pagination::ng-deep .ngx-pagination .pagination-next.disabled::after {
+    // content: '»';
+    content: none;
+}
+
+.my-pagination::ng-deep .ngx-pagination {
+    li {
+        border: 1px solid $blue;
+        border-radius: 5px;
+        font-family: Arial;
+        font-weight: normal;
+        color: $blue;
+        padding: 0.5rem 0.7rem;
+    }
+    li:active,
+     :hover,
+     :focus {
+        outline: 0;
+        outline-offset: 0;
+    }
+}
+
+.my-pagination::ng-deep .ngx-pagination a,
+.my-pagination::ng-deep .ngx-pagination button {
+    color: $blue;
+    display: block;
+    padding: 0;
+    border-radius: 0;
+}
+
+.my-pagination::ng-deep .ngx-pagination a:hover,
+.my-pagination::ng-deep .ngx-pagination button:hover {
+    background-color: $gray;
+}
+
+.my-pagination::ng-deep .ngx-pagination li:hover {
+    background-color: $gray;
+    border: 1px solid $gray;
+}
