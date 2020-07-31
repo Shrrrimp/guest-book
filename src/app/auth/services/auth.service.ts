@@ -33,7 +33,18 @@ export class AuthService {
           this.currentUserSubject.next(data);
         }
         return data;
-      }));
+    }));
+  }
+
+  public register(fd: FormData): Observable<User> {
+    return this.http.post<User>(this.baseUrl + 'api/v1/auth/register', fd)
+      .pipe(map(data => {
+        if (data) {
+          localStorage.setItem('currentUser', JSON.stringify(data));
+          this.currentUserSubject.next(data);
+        }
+        return data;
+    }));
   }
 
   // TODO: пересмотреть метод
@@ -41,9 +52,16 @@ export class AuthService {
     console.log('user:');
     console.log(this.currentUserValue);
 
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.token}` });
-    const options = { headers: headers };
-    return this.http.get(this.currentUserValue.user.avatar, options).pipe(map(data => {
+    // const headers = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.token}` });
+    // const options = { headers: headers };
+    // return this.http.get(this.currentUserValue.user.avatar, options).pipe(map(data => {
+    //   console.log('data');
+    //   console.log(data);
+    // }));
+
+    // const headers = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.token}` });
+    // const options = { headers: headers };
+    return this.http.get(this.currentUserValue.user.avatar).pipe(map(data => {
       console.log('data');
       console.log(data);
     }));
