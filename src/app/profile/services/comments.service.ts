@@ -47,4 +47,8 @@ export class CommentsService {
   addAnswer(commentId: number, message: string): Observable<Answer> {
     return this.http.post<Answer>(`${this.baseUrl}${this.postsUrl}/${commentId}/answers`, {message});
   }
+
+  deleteAnswer(commentId: number, answerId: number): Observable<{}> {
+    return this.http.delete(`${this.baseUrl}${this.postsUrl}/${commentId}/answers/${answerId}`);
+  }
 }

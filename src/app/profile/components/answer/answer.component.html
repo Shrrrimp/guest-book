@@ -1,4 +1,4 @@
-<div class="answer">
+<div [class.none]="isDeleted" class="answer">
     <img class="avatar" [src]="utilsService.getAvatar(answer.user.avatar)" onError="this.src='assets/images/no_avatar.png'" alt="{{ answer.user.name }}">
     <div class="right-block">
         <div class="info">
@@ -7,11 +7,10 @@
             <a href="mailto:{{ answer.user.email }}" class="email">{{ answer.user.email }}</a>
         </div>
         <div *ngIf="currentUser.is_admin || answer.user_id == currentUser.id" class="buttons">
-            <button><img src="assets/images/trash-can.png" alt="delete"></button>
+            <button (click)="deleteAnswer(answer)"><img src="assets/images/trash-can.png" alt="delete"></button>
         </div>
 
         <p class="text">{{ answer.message }}</p>
 
     </div>
-
 </div>

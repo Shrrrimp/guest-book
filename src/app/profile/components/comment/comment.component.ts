@@ -25,7 +25,7 @@ export class CommentComponent implements OnInit {
   public paginationConfig = {
     id: '',
     itemsPerPage: 0,
-    currentPage: 0,
+    currentPage: 1,
     totalItems: 0
   };
   public isModalDialogVisible = false;
@@ -54,6 +54,11 @@ export class CommentComponent implements OnInit {
     this.commentsService.deleteComment(comment.id).subscribe(() => {
       this.commentsService.commentsList.data = this.commentsService.commentsList.data.filter(c => c.id !== comment.id);
     }, err => console.error(err));
+  }
+
+  deleteAnswer(answerId) {
+    this.answersList.data = this.answersList.data.filter(answer => answer.id !== answerId.id);
+    --this.comment.answers_count;
   }
 
   showModal() {
