@@ -41,12 +41,7 @@ export class CommentComponent implements OnInit {
     });
   }
 
-  updateComment(comment: Comment) {
-    // TODO: поменять на данные из формы
-
-    const title = `updated title. ${comment.title}`;
-    const message = `updated message. ${comment.message}`;
-
+  updateComment(comment: Comment, title: string, message: string) {
     this.commentsService.updateComment(comment.id, title, message).subscribe((data) => {
       const toUpdate = this.commentsService.commentsList.data.indexOf(comment);
       if (toUpdate !== -1) {
@@ -76,9 +71,11 @@ export class CommentComponent implements OnInit {
     }
   }
 
-  closeEditModal($event: boolean, comment: Comment) {
+  closeEditModal($event: any, comment: Comment) {
     this.isEditDialogVisible = false;
-    //TODO: дописать логику
+    if ($event) {
+      this.updateComment(comment, $event.title, $event.message);
+    }
   }
 
   showAnswersList(comment: Comment) {

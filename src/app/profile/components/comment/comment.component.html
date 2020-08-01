@@ -7,8 +7,7 @@
             <a href="mailto:{{ comment.user.email }}" class="email">{{ comment.user.email }}</a>
         </div>
         <div *ngIf="currentUser.is_admin || currentUser.id == comment.user.id" class="buttons">
-            <!-- <button (click)="updateComment(comment)"><img src="assets/images/pen.png" alt="edit"></button> -->
-            <button (click)="showEditModal()"><img src="assets/images/pen.png" alt="edit"></button>
+            <button *ngIf="!comment.answers_count" (click)="showEditModal()"><img src="assets/images/pen.png" alt="edit"></button>
             <button (click)="showModal()"><img src="assets/images/trash-can.png" alt="delete"></button>
         </div>
 
@@ -39,4 +38,4 @@
 </li>
 
 <app-modal-dialog *ngIf="isModalDialogVisible" [title]="modalTitle" [message]="modalMessage" (isConfirmed)="closeModal($event, comment)"></app-modal-dialog>
-<app-edit-comment-dialog *ngIf="isEditDialogVisible" (isConfirmed)="closeEditModal($event, comment)"></app-edit-comment-dialog>
+<app-edit-comment-dialog *ngIf="isEditDialogVisible" [title]="comment.title" [message]="comment.message" (isConfirmed)="closeEditModal($event, comment)"></app-edit-comment-dialog>
