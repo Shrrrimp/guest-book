@@ -166,6 +166,8 @@
     
     .my-pagination::ng-deep .ngx-pagination .disabled {
         padding: 0.5rem 0.7rem;
+        background-color: $gray;
+        border: 1px solid $gray;
     }
     
     .my-pagination::ng-deep .ngx-pagination li:hover {
