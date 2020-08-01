@@ -1,7 +1,7 @@
 <header>
     <h2>Guest Book</h2>
 
-    <div class="links">
+    <div class="links" *ngIf="currentUser">
         <div class="user">
             <img class="ava" [src]="utilsService.getAvatar(currentUser.avatar)" onError="this.src='assets/images/no_avatar.png'" alt="{{ currentUser.name }}">
             <h5 class="name">{{ currentUser.name }}</h5>
@@ -11,7 +11,7 @@
             <div class="alert"></div>
         </a>
 
-        <a class="log-out-link" href="#">
+        <a class="log-out-link" href="#" (click)="logOut()">
             <img class="log-out" src="assets/images/log-out.png" alt="logout">
         </a>
     </div>
