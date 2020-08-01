@@ -5,6 +5,7 @@ import { AnswersList } from '../../models/answer.model';
 import { User } from '../../models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-comment',
@@ -32,7 +33,7 @@ export class CommentComponent implements OnInit {
   public modalTitle = 'Are you sure?';
   public modalMessage = 'Do you want to delete message?';
 
-  constructor(public commentsService: CommentsService) { }
+  constructor(public commentsService: CommentsService, public utilsService: UtilsService) { }
 
   ngOnInit(): void {
     this.addAnswerForm = new FormGroup({

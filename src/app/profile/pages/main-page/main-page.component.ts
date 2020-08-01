@@ -5,6 +5,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { PusherService } from '../../services/pusher.service';
 import { User } from '../../models/user.model';
 import { Subscription } from 'rxjs';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-main-page',
@@ -13,8 +14,6 @@ import { Subscription } from 'rxjs';
 })
 export class MainPageComponent implements OnInit, OnDestroy {
   public addCommentForm: FormGroup;
-  public currentUserPic: string;
-  ////////////////////////////////////////////////
   public currentUser: User;
   private currentUserSubscription: Subscription;
 
@@ -27,7 +26,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
   constructor(
     public commentsService: CommentsService,
     private authService: AuthService,
-    private pusherService: PusherService
+    private pusherService: PusherService,
+    public utilsService: UtilsService
     ) {
       this.currentUserSubscription = this.authService.currentUser.subscribe(user => {
         this.currentUser = user.user;
@@ -35,7 +35,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit(): void {
-
     this.pusherService.echo.channel('posts').listen('PublicPush', e => {
       console.log('EVENT!!!');
       console.log(e, 'evvvent!');
@@ -50,13 +49,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
       title: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       message: new FormControl('', [Validators.required, Validators.maxLength(65535)])
     });
-
-    this.currentUserPic = 'assets/images/no_avatar.png';
-
-    // TODO: загрузка юзер картинки
-    // this.authService.getCurrentUserPic().subscribe(data => {
-    //   this.currentUserPic = data;
-    // }, err => console.error(err));
 
     this.commentsService.getCommentsList().subscribe((data) => {
       this.commentsService.commentsList = data;

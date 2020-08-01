@@ -1,5 +1,5 @@
 <div class="answer">
-    <img class="avatar" src="assets/images/no_avatar.png" alt="{{ answer.user.name }}">
+    <img class="avatar" [src]="utilsService.getAvatar(answer.user.avatar)" onError="this.src='assets/images/no_avatar.png'" alt="{{ answer.user.name }}">
     <div class="right-block">
         <div class="info">
             <h4>{{ answer.user.name }}</h4>

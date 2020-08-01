@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="new-entry">
-        <img class="avatar" src="{{ currentUserPic }}" alt="{{ currentUser.name }}">
+        <img class="avatar" [src]="utilsService.getAvatar(currentUser.avatar)" onError="this.src='assets/images/no_avatar.png'" [alt]="currentUser.name">
         <div class="right-block">
             <form (ngSubmit)="addComment()" [formGroup]="addCommentForm" name="entry-block" method="post">
                 <input type="text" size="40" placeholder="Title" formControlName="title" maxlength="255">
