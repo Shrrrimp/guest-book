@@ -1,14 +1,19 @@
 <div class="reg-form">
     <form (ngSubmit)="submit()" [formGroup]="form">
         <h2>Registration form</h2>
-        <div class="wrong-data">
-            <p *ngFor="let error of errors">{{ error }}</p>
+        <div>
+            <p class="wrong-data" *ngFor="let error of errors">{{ error }}</p>
         </div>
 
         <img [src]="imgUrl" class="avatar">
         <label>
                 <div class="titles">
-                 <p>Profile Image {{ selectedFile?.name }}</p>
+                 <p class="prof-img">Profile Image 
+                    <span class="img-name">
+                        {{ selectedFile?.name }}
+                    </span>
+                 </p>
+         
                 </div>
                 </label>
         <!-- <input type="text" class="text-input" size="50"> -->
