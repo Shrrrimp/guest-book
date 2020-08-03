@@ -4,16 +4,21 @@ import { HttpClient } from '@angular/common/http';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PusherService {
-  echo: Echo;
+  public echo: Echo;
+  private publicSubject: BehaviorSubject<object>;
+  public publicPush: Observable<any>;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     const currentUser = this.authService.currentUserValue;
+    this.publicSubject = new BehaviorSubject<any>(null);
+    this.publicPush = this.publicSubject.asObservable();
 
     Pusher.logToConsole = true;
 
@@ -34,6 +39,21 @@ export class PusherService {
       },
       enabledTransports: ['ws', 'wss'], // https://github.com/beyondcode/laravelwebsockets/issues/86
       disableStats: true,
+    });
+
+    this.echo.channel('posts').listen('PublicPush', e => {
+      if (e.data.type === 'post_deleted') {
+        this.publicSubject.next(e.data);
+      }
+
+      if (e.data.data.user_id !== currentUser.user.id) {
+        this.publicSubject.next(e.data);
+      }
+    });
+
+    this.echo.private('user.' + currentUser.user.id.toString()).listen('UserPush', e => {
+      console.log('USER EVENT!!!');
+      console.log(e, 'userrr evvvent!');
     });
   }
 

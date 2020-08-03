@@ -16,6 +16,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public addCommentForm: FormGroup;
   public currentUser: User;
   private currentUserSubscription: Subscription;
+  private publicPusherSubscription: Subscription;
 
   public paginationConfig = {
     itemsPerPage: 0,
@@ -29,22 +30,26 @@ export class MainPageComponent implements OnInit, OnDestroy {
     private pusherService: PusherService,
     public utilsService: UtilsService
     ) {
-      this.currentUserSubscription = this.authService.currentUser.subscribe(user => {
-        this.currentUser = user.user;
-      });
+        this.currentUserSubscription = this.authService.currentUser.subscribe(user => {
+          this.currentUser = user.user;
+        });
+
+        this.publicPusherSubscription = this.pusherService.publicPush.subscribe(e => {
+          if (!e) { return; }
+          switch (e.type) {
+            case 'post_added':
+              this.addCommentToList(e.data);
+              break;
+            case 'post_updated':
+              this.updateComment(e.data);
+              break;
+            case 'post_deleted':
+              this.deleteComment(e.data);
+          }
+        });
     }
 
   ngOnInit(): void {
-    this.pusherService.echo.channel('posts').listen('PublicPush', e => {
-      console.log('EVENT!!!');
-      console.log(e, 'evvvent!');
-    });
-
-    this.pusherService.echo.private('user.' + this.currentUser.id.toString()).listen('UserPush', e => {
-      console.log('USER EVENT!!!');
-      console.log(e, 'userrr evvvent!');
-    });
-
     this.addCommentForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       message: new FormControl('', [Validators.required, Validators.maxLength(65535)])
@@ -67,12 +72,29 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   get message() { return this.addCommentForm.get('message'); }
 
+  private addCommentToList(comment: any) {
+    if (this.paginationConfig.currentPage === 1) {
+      this.commentsService.commentsList.data.unshift(comment);
+    }
+  }
+
+  private updateComment(comment: any) {
+    this.commentsService.commentsList.data.map(c => {
+      if (c.id === comment.id) {
+        const toUpdate = this.commentsService.commentsList.data.indexOf(c);
+        this.commentsService.commentsList.data[toUpdate] = comment;
+      }
+    });
+  }
+
+  private deleteComment(comment: any) {
+    this.commentsService.commentsList.data = this.commentsService.commentsList.data.filter(c => c.id !== comment.id);
+  }
+
   addComment() {
     if (this.addCommentForm.valid) {
       this.commentsService.addComment(this.title.value, this.message.value).subscribe(data => {
-        if (this.paginationConfig.currentPage === 1) {
-          this.commentsService.commentsList.data.unshift(data);
-        }
+        this.addCommentToList(data);
         this.addCommentForm.reset();
       }, err => console.error(err));
     }
@@ -89,6 +111,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.currentUserSubscription.unsubscribe();
+    this.publicPusherSubscription.unsubscribe();
   }
 
 }
