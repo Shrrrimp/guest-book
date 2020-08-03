@@ -25,7 +25,7 @@ export class CommentComponent implements OnInit {
   public paginationConfig = {
     id: '',
     itemsPerPage: 0,
-    currentPage: 0,
+    currentPage: 1,
     totalItems: 0
   };
   public isModalDialogVisible = false;
@@ -41,12 +41,7 @@ export class CommentComponent implements OnInit {
     });
   }
 
-  updateComment(comment: Comment) {
-    // TODO: поменять на данные из формы
-
-    const title = `updated title. ${comment.title}`;
-    const message = `updated message. ${comment.message}`;
-
+  updateComment(comment: Comment, title: string, message: string) {
     this.commentsService.updateComment(comment.id, title, message).subscribe((data) => {
       const toUpdate = this.commentsService.commentsList.data.indexOf(comment);
       if (toUpdate !== -1) {
@@ -59,6 +54,11 @@ export class CommentComponent implements OnInit {
     this.commentsService.deleteComment(comment.id).subscribe(() => {
       this.commentsService.commentsList.data = this.commentsService.commentsList.data.filter(c => c.id !== comment.id);
     }, err => console.error(err));
+  }
+
+  deleteAnswer(answerId) {
+    this.answersList.data = this.answersList.data.filter(answer => answer.id !== answerId.id);
+    --this.comment.answers_count;
   }
 
   showModal() {
@@ -76,9 +76,11 @@ export class CommentComponent implements OnInit {
     }
   }
 
-  closeEditModal($event: boolean, comment: Comment) {
+  closeEditModal($event: any, comment: Comment) {
     this.isEditDialogVisible = false;
-    //TODO: дописать логику
+    if ($event) {
+      this.updateComment(comment, $event.title, $event.message);
+    }
   }
 
   showAnswersList(comment: Comment) {

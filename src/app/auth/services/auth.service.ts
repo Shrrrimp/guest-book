@@ -36,6 +36,11 @@ export class AuthService {
     }));
   }
 
+  public logOut() {
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+  }
+
   public register(fd: FormData): Observable<User> {
     return this.http.post<User>(this.baseUrl + 'api/v1/auth/register', fd)
       .pipe(map(data => {

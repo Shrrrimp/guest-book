@@ -7,8 +7,7 @@
             <a href="mailto:{{ comment.user.email }}" class="email">{{ comment.user.email }}</a>
         </div>
         <div *ngIf="currentUser.is_admin || currentUser.id == comment.user.id" class="buttons">
-            <!-- <button (click)="updateComment(comment)"><img src="assets/images/pen.png" alt="edit"></button> -->
-            <button (click)="showEditModal()"><img src="assets/images/pen.png" alt="edit"></button>
+            <button *ngIf="!comment.answers_count" (click)="showEditModal()"><img src="assets/images/pen.png" alt="edit"></button>
             <button (click)="showModal()"><img src="assets/images/trash-can.png" alt="delete"></button>
         </div>
 
@@ -30,7 +29,7 @@
         </a>
 
         <div *ngIf="answersList && isAnswersListVisible" class="answer">
-            <app-answer *ngFor="let answer of answersList.data | paginate: paginationConfig" [answer]="answer" [currentUser]="currentUser"></app-answer>
+            <app-answer *ngFor="let answer of answersList.data | paginate: paginationConfig" [answer]="answer" [currentUser]="currentUser" (deleted)="deleteAnswer($event)"></app-answer>
             <pagination-controls *ngIf="paginationConfig.totalItems > paginationConfig.itemsPerPage" class="my-pagination" [previousLabel]="'prev'" [nextLabel]="'next'" (pageChange)="onPageChange($event)" [id]="comment.id">
             </pagination-controls>
         </div>
@@ -39,4 +38,4 @@
 </li>
 
 <app-modal-dialog *ngIf="isModalDialogVisible" [title]="modalTitle" [message]="modalMessage" (isConfirmed)="closeModal($event, comment)"></app-modal-dialog>
-<app-edit-comment-dialog *ngIf="isEditDialogVisible" (isConfirmed)="closeEditModal($event, comment)"></app-edit-comment-dialog>
+<app-edit-comment-dialog *ngIf="isEditDialogVisible" [title]="comment.title" [message]="comment.message" (isConfirmed)="closeEditModal($event, comment)"></app-edit-comment-dialog>
