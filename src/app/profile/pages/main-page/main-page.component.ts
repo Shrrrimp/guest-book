@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewContainerRef, ViewChild, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommentsService } from '../../services/comments.service';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -6,6 +6,7 @@ import { PusherService } from '../../services/pusher.service';
 import { User } from '../../models/user.model';
 import { Subscription } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { NotificationComponent } from '../../components/notification/notification.component';
 
 @Component({
   selector: 'app-main-page',
@@ -13,22 +14,26 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit, OnDestroy {
+  @ViewChild('notificationContainer', { read: ViewContainerRef }) container;
   public addCommentForm: FormGroup;
   public currentUser: User;
   private currentUserSubscription: Subscription;
   private publicPusherSubscription: Subscription;
+  private privatePusherSubscription: Subscription;
 
   public paginationConfig = {
     itemsPerPage: 0,
     currentPage: 0,
     totalItems: 0
   };
+  private componentRef: ComponentRef<any>;
 
   constructor(
     public commentsService: CommentsService,
     private authService: AuthService,
     private pusherService: PusherService,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    private resolver: ComponentFactoryResolver
     ) {
         this.currentUserSubscription = this.authService.currentUser.subscribe(user => {
           this.currentUser = user.user;
@@ -47,9 +52,17 @@ export class MainPageComponent implements OnInit, OnDestroy {
               this.deleteComment(e.data);
           }
         });
+
+        this.privatePusherSubscription = this.pusherService.privatePush.subscribe(e => {
+          if (!e) { return; }
+          const factory = this.resolver.resolveComponentFactory(NotificationComponent);
+          this.componentRef = this.container.createComponent(factory);
+          this.componentRef.instance.title = e.data.post.title;
+        });
     }
 
   ngOnInit(): void {
+
     this.addCommentForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       message: new FormControl('', [Validators.required, Validators.maxLength(65535)])
@@ -92,6 +105,12 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   addComment() {
+    /////////////////////////////////////////////////////
+    const factory = this.resolver.resolveComponentFactory(NotificationComponent);
+    this.componentRef = this.container.createComponent(factory);
+    this.componentRef.instance.title = 'Title!!!';
+    //////////////////////////////////////////////////////////////////
+
     if (this.addCommentForm.valid) {
       this.commentsService.addComment(this.title.value, this.message.value).subscribe(data => {
         this.addCommentToList(data);
@@ -112,6 +131,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.currentUserSubscription.unsubscribe();
     this.publicPusherSubscription.unsubscribe();
+    this.componentRef.destroy();
   }
 
 }

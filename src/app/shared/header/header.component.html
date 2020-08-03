@@ -6,10 +6,10 @@
             <img class="ava" [src]="utilsService.getAvatar(currentUser.avatar)" onError="this.src='assets/images/no_avatar.png'" alt="{{ currentUser.name }}">
             <h5 class="name">{{ currentUser.name }}</h5>
         </div>
-        <a class="notific" href="#">
+        <!-- <a class="notific" (click)="toggle()">
             <img class="bell" src="assets/images/bell.png" alt="bell">
             <div class="alert"></div>
-        </a>
+        </a> -->
 
         <a class="log-out-link" href="#" (click)="logOut()">
             <img class="log-out" src="assets/images/log-out.png" alt="logout">
