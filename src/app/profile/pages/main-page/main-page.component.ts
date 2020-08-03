@@ -62,6 +62,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit(): void {
+
     this.addCommentForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       message: new FormControl('', [Validators.required, Validators.maxLength(65535)])
@@ -104,6 +105,12 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   addComment() {
+    /////////////////////////////////////////////////////
+    const factory = this.resolver.resolveComponentFactory(NotificationComponent);
+    this.componentRef = this.container.createComponent(factory);
+    this.componentRef.instance.title = 'Title!!!';
+    //////////////////////////////////////////////////////////////////
+
     if (this.addCommentForm.valid) {
       this.commentsService.addComment(this.title.value, this.message.value).subscribe(data => {
         this.addCommentToList(data);
