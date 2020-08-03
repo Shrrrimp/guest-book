@@ -9,15 +9,18 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { EditCommentDialogComponent } from './components/edit-comment-dialog/edit-comment-dialog.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NotificationComponent } from './components/notification/notification.component';
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
+  entryComponents: [ NotificationComponent ],
   declarations: [
     MainPageComponent,
     AnswerComponent,
     CommentComponent,
     ModalDialogComponent,
     EditCommentDialogComponent,
+    // NotificationComponent,
   ],
   imports: [
     CommonModule,

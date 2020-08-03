@@ -14,11 +14,15 @@ export class PusherService {
   public echo: Echo;
   private publicSubject: BehaviorSubject<object>;
   public publicPush: Observable<any>;
+  private privateSubject: BehaviorSubject<object>;
+  public privatePush: Observable<any>;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     const currentUser = this.authService.currentUserValue;
     this.publicSubject = new BehaviorSubject<any>(null);
     this.publicPush = this.publicSubject.asObservable();
+    this.privateSubject = new BehaviorSubject<any>(null);
+    this.privatePush = this.privateSubject.asObservable();
 
     Pusher.logToConsole = true;
 
@@ -54,6 +58,9 @@ export class PusherService {
     this.echo.private('user.' + currentUser.user.id.toString()).listen('UserPush', e => {
       console.log('USER EVENT!!!');
       console.log(e, 'userrr evvvent!');
+      if (e.data.type === 'answer_added' && e.data.data.user.is_admin) {
+        this.privateSubject.next(e.data);
+      }
     });
   }
 

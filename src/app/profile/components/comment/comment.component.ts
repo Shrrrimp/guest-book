@@ -33,7 +33,7 @@ export class CommentComponent implements OnInit {
   public modalTitle = 'Are you sure?';
   public modalMessage = 'Do you want to delete message?';
 
-  constructor(public commentsService: CommentsService, public utilsService: UtilsService) { }
+  constructor(public commentsService: CommentsService, public utilsService: UtilsService) {}
 
   ngOnInit(): void {
     this.addAnswerForm = new FormGroup({
@@ -86,6 +86,7 @@ export class CommentComponent implements OnInit {
   showAnswersList(comment: Comment) {
     this.commentsService.getAnswersList(comment.id).subscribe((data) => {
       this.answersList = data;
+      this.comment.answers_count = this.answersList.meta.total;
 
       console.log('list:');
       console.log(this.answersList);
@@ -104,10 +105,7 @@ export class CommentComponent implements OnInit {
     } else {
       this.isAnswersListVisible = true;
       this.arrowAngle = 0;
-
-      if (!this.answersList) {
-        this.showAnswersList(comment);
-      }
+      this.showAnswersList(comment);
     }
   }
 
