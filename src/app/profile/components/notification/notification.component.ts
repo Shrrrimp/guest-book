@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-notification',
@@ -7,11 +7,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NotificationComponent implements OnInit {
   @Input() title: string;
-  // @Input() message: string;
+  @Input() user: string;
+  @Output() isClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  close(): void {
+    this.isClosed.emit(true);
   }
 
 }

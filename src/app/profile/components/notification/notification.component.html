@@ -1,11 +1,11 @@
 <div class="notif-info">
 
-    <a class="close" href="#">
+    <a class="close" (click)="close()">
         <img class="cls-img" src="assets/images/close.png" alt="close">
     </a>
     <div class="notif-text">
-        <p class="msg"><span>Username</span> answered</p>
-        <p class="msg">04.08.2020 on your entry <span class="title">{{ title }}</span></p>
+        <p class="msg"><span>{{ user }}</span> answered</p>
+        <p class="msg">on your entry <span class="title">{{ title }}</span></p>
     </div>
 
 </div>

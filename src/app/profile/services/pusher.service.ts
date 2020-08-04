@@ -24,7 +24,7 @@ export class PusherService {
     this.privateSubject = new BehaviorSubject<any>(null);
     this.privatePush = this.privateSubject.asObservable();
 
-    Pusher.logToConsole = true;
+    Pusher.logToConsole = false;
 
     this.echo = new Echo({
       broadcaster: 'pusher',
