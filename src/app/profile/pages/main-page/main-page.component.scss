@@ -22,7 +22,6 @@
                 display: inline-block;
             }
             .right-block {
-                // width: 500px;
                 display: inline-block;
                 vertical-align: top;
                 margin-left: 40px;
@@ -128,7 +127,6 @@
     
     .my-pagination::ng-deep .ngx-pagination .pagination-next a::after,
     .my-pagination::ng-deep .ngx-pagination .pagination-next.disabled::after {
-        // content: '»';
         content: none;
     }
     
@@ -139,7 +137,6 @@
             font-family: Arial;
             font-weight: normal;
             color: $blue;
-            // padding: 0.5rem 0.7rem;
             padding: 0;
         }
         li:active,
@@ -173,4 +170,11 @@
     .my-pagination::ng-deep .ngx-pagination li:hover {
         background-color: $gray;
         border: 1px solid $gray;
+    }
+    
+    .notific {
+        position: fixed;
+        z-index: 99999;
+        bottom: 30px;
+        right: 30px;
     }

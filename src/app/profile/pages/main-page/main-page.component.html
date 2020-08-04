@@ -19,11 +19,7 @@
 <div class="comments">
     <ul *ngIf="commentsService.commentsList; else noComments">
         <app-comment *ngFor="let comment of commentsService.commentsList.data | paginate: paginationConfig" [comment]="comment" [currentUser]="currentUser"></app-comment>
-        <pagination-controls 
-            class="my-pagination" 
-            [previousLabel]="'prev'"
-            [nextLabel]="'next'" 
-            (pageChange)="onPageChange($event)">
+        <pagination-controls class="my-pagination" [previousLabel]="'prev'" [nextLabel]="'next'" (pageChange)="onPageChange($event)">
         </pagination-controls>
     </ul>
 
@@ -32,4 +28,12 @@
     </ng-template>
 </div>
 
-<template #notificationContainer></template>
+<div class="notific">
+    <template #notificationContainer></template>
+</div>
+
+<!-- <div id="msg_pop">
+    <span class="msg_close" onclick="document.getElementById('msg_pop').style.display='none'; return false;">X</span>
+    <h4>Заголовок</h4>
+    Пример модального окна, всплывающего при загрузке сайта.
+</div> -->
