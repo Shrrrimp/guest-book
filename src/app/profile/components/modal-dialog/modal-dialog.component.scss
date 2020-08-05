@@ -73,3 +73,27 @@ $gray: #797FA5;
         }
     }
 }
+
+@media screen and (max-width: 560px) {
+    .modal-container {
+        width: 420px;
+        height: 220px;
+        padding: 10px;
+        h2 {
+            font-size: 28px;
+        }
+        p {
+            font-size: 18px;
+        }
+        .delete {
+            width: 230px;
+            height: 80px;
+            font-size: 18px;
+        }
+        .cancel {
+            width: 230px;
+            height: 80px;
+            font-size: 18px;
+        }
+    }
+}

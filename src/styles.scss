@@ -1,9 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
+html {
+    width: 100%;
+}
+
+body {
+    width: 100%;
+}
+
 * {
     margin: 0;
 }
 
 a {
     text-decoration: none;
+}
+
+@media screen and (max-width: 890px) {
+    html {
+        width: 880px;
+    }
+    body {
+        width: 880px;
+    }
 }

@@ -77,7 +77,6 @@ $gray: #797FA5;
     .reg-link {
         color: $gray;
         font-family: Arial;
-        // font-weight: bold;
         font-size: 12px;
         display: flex;
         justify-content: center;
@@ -110,5 +109,43 @@ $gray: #797FA5;
      :focus {
         outline: 0;
         outline-offset: 0;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .login-form {
+        width: 60%;
+        form {
+            h2 {
+                font-size: 22px;
+            }
+            .wrong-data {
+                font-size: 18px;
+            }
+        }
+        label {
+            .titles {
+                .error {
+                    margin-left: auto;
+                    p {
+                        color: $red;
+                        font-size: 18px;
+                    }
+                }
+            }
+            p {
+                font-size: 18px;
+            }
+        }
+        input {
+            width: 100%;
+            height: 50px;
+        }
+        .reg-link {
+            font-size: 18px;
+        }
+        .login-btn {
+            height: 50px;
+        }
     }
 }

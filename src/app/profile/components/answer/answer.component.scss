@@ -76,3 +76,9 @@ $gray: #797FA5;
 .none {
     display: none;
 }
+
+@media screen and (max-width: 890px) {
+    .right-block {
+        width: 480px;
+    }
+}
