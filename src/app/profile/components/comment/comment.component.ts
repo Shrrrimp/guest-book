@@ -131,7 +131,7 @@ export class CommentComponent implements OnInit {
         this.answersList.data.push(data);
       }
 
-      ++this.comment.answers_count;
+      this.comment.answers_count ? ++this.comment.answers_count : this.comment.answers_count = 1;
       this.addAnswerForm.reset();
     }, err => console.error(err));
   }
