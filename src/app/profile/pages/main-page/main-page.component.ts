@@ -75,9 +75,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.commentsService.getCommentsList().subscribe((data) => {
       this.commentsService.commentsList = data;
 
-      console.log('comments:');
-      console.log(this.commentsService.commentsList);
-
       this.paginationConfig.currentPage = this.commentsService.commentsList.meta.current_page;
       this.paginationConfig.itemsPerPage = this.commentsService.commentsList.meta.per_page;
       this.paginationConfig.totalItems = this.commentsService.commentsList.meta.total;

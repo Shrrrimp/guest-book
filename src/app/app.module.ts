@@ -8,7 +8,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderComponent } from './shared/header/header.component';
 import { TokenInterceptorService } from './auth/interceptors/token-interceptor.service';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,8 +19,6 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
-    // FormsModule,
-    // ReactiveFormsModule
   ],
   providers: [
     AuthService,
