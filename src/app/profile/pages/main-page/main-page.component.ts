@@ -60,6 +60,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
           componentRef.instance.title = e.data.post.title;
           componentRef.instance.user = e.data.user.name;
           componentRef.instance.isClosed.subscribe(() => componentRef.destroy());
+          setTimeout(() => componentRef.destroy(), 60000);
+          this.playAudio();
         });
     }
 
@@ -122,6 +124,13 @@ export class MainPageComponent implements OnInit, OnDestroy {
       this.commentsService.commentsList = data;
       this.paginationConfig.totalItems = this.commentsService.commentsList.meta.total;
     });
+  }
+
+  playAudio() {
+    const audio = new Audio();
+    audio.src = 'assets/audio/notification.mp3';
+    audio.load();
+    audio.play();
   }
 
   ngOnDestroy() {
