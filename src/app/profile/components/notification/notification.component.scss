@@ -39,3 +39,17 @@ $gray: #797FA5;
         }
     }
 }
+
+@media screen and (max-width: 560px) {
+    .notif-info {
+        font-size: 18px;
+        .close {
+            width: 20px;
+            height: 20px;
+            .cls-img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}
