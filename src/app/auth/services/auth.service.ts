@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -26,9 +26,6 @@ export class AuthService {
     return this.http.post<User>(this.baseUrl + 'api/v1/auth/login', {email, password})
       .pipe(map(data => {
         if (data) {
-          console.log('ma user:');
-          console.log(data);
-
           localStorage.setItem('currentUser', JSON.stringify(data));
           this.currentUserSubject.next(data);
         }

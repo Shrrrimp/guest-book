@@ -88,9 +88,6 @@ export class CommentComponent implements OnInit {
       this.answersList = data;
       this.comment.answers_count = this.answersList.meta.total;
 
-      console.log('list:');
-      console.log(this.answersList);
-
       this.paginationConfig.id = `${comment.id}`;
       this.paginationConfig.currentPage = this.answersList.meta.current_page;
       this.paginationConfig.itemsPerPage = this.answersList.meta.per_page;
@@ -131,7 +128,7 @@ export class CommentComponent implements OnInit {
         this.answersList.data.push(data);
       }
 
-      ++this.comment.answers_count;
+      this.comment.answers_count ? ++this.comment.answers_count : this.comment.answers_count = 1;
       this.addAnswerForm.reset();
     }, err => console.error(err));
   }

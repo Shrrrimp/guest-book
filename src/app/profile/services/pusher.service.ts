@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -17,14 +15,14 @@ export class PusherService {
   private privateSubject: BehaviorSubject<object>;
   public privatePush: Observable<any>;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private authService: AuthService) {
     const currentUser = this.authService.currentUserValue;
     this.publicSubject = new BehaviorSubject<any>(null);
     this.publicPush = this.publicSubject.asObservable();
     this.privateSubject = new BehaviorSubject<any>(null);
     this.privatePush = this.privateSubject.asObservable();
 
-    Pusher.logToConsole = true;
+    Pusher.logToConsole = false;
 
     this.echo = new Echo({
       broadcaster: 'pusher',
@@ -56,9 +54,7 @@ export class PusherService {
     });
 
     this.echo.private('user.' + currentUser.user.id.toString()).listen('UserPush', e => {
-      console.log('USER EVENT!!!');
-      console.log(e, 'userrr evvvent!');
-      if (e.data.type === 'answer_added' && e.data.data.user.is_admin) {
+      if (e.data.type === 'answer_added' && e.data.data.user.is_admin && e.data.data.user.id !== currentUser.user.id) {
         this.privateSubject.next(e.data);
       }
     });

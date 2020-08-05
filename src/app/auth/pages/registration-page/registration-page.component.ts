@@ -32,7 +32,6 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   onFileSelected(event) {
-    console.log(event.target.files);
     if (event.target.files) {
       this.selectedFile = event.target.files[0];
       const reader = new FileReader();

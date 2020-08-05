@@ -15,18 +15,17 @@ import { NotificationComponent } from '../../components/notification/notificatio
 })
 export class MainPageComponent implements OnInit, OnDestroy {
   @ViewChild('notificationContainer', { read: ViewContainerRef }) container;
-  public addCommentForm: FormGroup;
-  public currentUser: User;
   private currentUserSubscription: Subscription;
   private publicPusherSubscription: Subscription;
   private privatePusherSubscription: Subscription;
 
+  public addCommentForm: FormGroup;
+  public currentUser: User;
   public paginationConfig = {
     itemsPerPage: 0,
     currentPage: 0,
     totalItems: 0
   };
-  private componentRef: ComponentRef<any>;
 
   constructor(
     public commentsService: CommentsService,
@@ -56,8 +55,13 @@ export class MainPageComponent implements OnInit, OnDestroy {
         this.privatePusherSubscription = this.pusherService.privatePush.subscribe(e => {
           if (!e) { return; }
           const factory = this.resolver.resolveComponentFactory(NotificationComponent);
-          this.componentRef = this.container.createComponent(factory);
-          this.componentRef.instance.title = e.data.post.title;
+          let componentRef: ComponentRef<any>;
+          componentRef = this.container.createComponent(factory);
+          componentRef.instance.title = e.data.post.title;
+          componentRef.instance.user = e.data.user.name;
+          componentRef.instance.isClosed.subscribe(() => componentRef.destroy());
+          setTimeout(() => componentRef.destroy(), 60000);
+          this.playAudio();
         });
     }
 
@@ -70,9 +74,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
     this.commentsService.getCommentsList().subscribe((data) => {
       this.commentsService.commentsList = data;
-
-      console.log('comments:');
-      console.log(this.commentsService.commentsList);
 
       this.paginationConfig.currentPage = this.commentsService.commentsList.meta.current_page;
       this.paginationConfig.itemsPerPage = this.commentsService.commentsList.meta.per_page;
@@ -105,12 +106,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   addComment() {
-    /////////////////////////////////////////////////////
-    const factory = this.resolver.resolveComponentFactory(NotificationComponent);
-    this.componentRef = this.container.createComponent(factory);
-    this.componentRef.instance.title = 'Title!!!';
-    //////////////////////////////////////////////////////////////////
-
     if (this.addCommentForm.valid) {
       this.commentsService.addComment(this.title.value, this.message.value).subscribe(data => {
         this.addCommentToList(data);
@@ -128,10 +123,18 @@ export class MainPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  playAudio() {
+    const audio = new Audio();
+    audio.src = 'assets/audio/notification.mp3';
+    audio.load();
+    audio.play();
+  }
+
   ngOnDestroy() {
     this.currentUserSubscription.unsubscribe();
     this.publicPusherSubscription.unsubscribe();
-    this.componentRef.destroy();
+    this.privatePusherSubscription.unsubscribe();
+    this.container.clear();
   }
 
 }
