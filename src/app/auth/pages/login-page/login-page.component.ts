@@ -39,8 +39,8 @@ export class LoginPageComponent implements OnInit {
         this.isPasswordInvalid = false;
       });
     } else {
-      this.login.errors ? this.isEmailInvalid = true : this.isEmailInvalid = false;
-      this.password.errors ? this.isPasswordInvalid = true : this.isPasswordInvalid = false;
+      this.isEmailInvalid = !!this.login.errors;
+      this.isPasswordInvalid = !!this.password.errors;
     }
   }
 

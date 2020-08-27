@@ -81,10 +81,10 @@ export class RegistrationPageComponent implements OnInit {
         }
       });
     } else {
-      this.login.errors ? this.isEmailInvalid = true : this.isEmailInvalid = false;
-      this.password.errors ? this.isPasswordInvalid = true : this.isPasswordInvalid = false;
-      this.name.errors ? this.isNameInvalid = true : this.isNameInvalid = false;
-      this.isPasswordConfirmed() ? this.isPasswordConfirmInvalid = false : this.isPasswordConfirmInvalid = true;
+      this.isEmailInvalid = !!this.login.errors;
+      this.isPasswordInvalid = !!this.password.errors;
+      this.isNameInvalid = !!this.name.errors;
+      this.isPasswordConfirmInvalid = !!this.isPasswordConfirmed();
     }
 
   }
