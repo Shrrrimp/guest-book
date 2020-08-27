@@ -3,7 +3,7 @@ import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,7 @@ export class PusherService {
 
   constructor(private authService: AuthService) {
     const currentUser = this.authService.currentUserValue;
+    const config = environment.socket;
     this.publicSubject = new BehaviorSubject<any>(null);
     this.publicPush = this.publicSubject.asObservable();
     this.privateSubject = new BehaviorSubject<any>(null);
@@ -27,12 +28,12 @@ export class PusherService {
     this.echo = new Echo({
       broadcaster: 'pusher',
       key: 'key',
-      wsHost: 'guest-book.naveksoft.com',
-      wsPort: '443',
-      wssPort: '443',
-      wsPath: '/ws',
-      encrypted: true,
-      authEndpoint: 'https://guest-book.naveksoft.com/broadcasting/auth',
+      wsHost: config.url,
+      wsPort: config.port,
+      wssPort: config.port,
+      wsPath: config.path,
+      encrypted: config.encrypted,
+      authEndpoint: config.auth.url,
       auth: {
         headers: {
           Authorization: `Bearer ${currentUser.token.access_token}`,
