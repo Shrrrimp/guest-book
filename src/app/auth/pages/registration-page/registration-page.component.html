@@ -48,6 +48,6 @@
             <input type="password" class="text-input" [class.required]="isPasswordConfirmInvalid" formControlName="passwordConfirm" maxlength="255" minlength="8" required>
         </label>
         <button class="reg-btn" type="submit">Register</button>
-        <a class="reg-link" href="auth/login">Log in</a>
+        <a routerLink="/auth/login" class="reg-link">Log in</a>
     </form>
 </div>

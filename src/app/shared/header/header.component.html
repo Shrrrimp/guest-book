@@ -6,7 +6,7 @@
             <img class="ava" [src]="utilsService.getAvatar(currentUser.avatar)" onError="this.src='assets/images/no_avatar.png'" alt="{{ currentUser.name }}">
             <h5 class="name">{{ currentUser.name }}</h5>
         </div>
-        <a class="log-out-link" href="#" (click)="logOut()">
+        <a class="log-out-link" (click)="logOut()">
             <img class="log-out" src="assets/images/log-out.png" alt="logout">
         </a>
     </div>

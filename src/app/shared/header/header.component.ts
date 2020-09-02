@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { User } from 'src/app/profile/models/user.model';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../services/utils.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public currentUser: User;
   private currentUserSubscription: Subscription;
 
-  constructor(private authService: AuthService, public utilsService: UtilsService) {
+  constructor(private router: Router, private authService: AuthService, public utilsService: UtilsService) {
     this.currentUserSubscription = this.authService.currentUser.subscribe(user => {
       user ?  this.currentUser = user.user : this.currentUser = null;
     });
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logOut() {
     this.authService.logOut();
+    this.router.navigate(['/auth/login']);
   }
 
   ngOnDestroy() {
