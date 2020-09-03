@@ -62,7 +62,9 @@ export class RegistrationPageComponent implements OnInit {
   submit() {
     if (this.isPasswordConfirmed() && this.form.valid) {
       const fd = new FormData();
-      fd.append('avatar', this.selectedFile, this.selectedFile.name);
+      if(this.selectedFile) {
+        fd.append('avatar', this.selectedFile, this.selectedFile.name);
+      }
       fd.append('email', this.login.value);
       fd.append('name', this.name.value);
       fd.append('password', this.password.value);
@@ -84,7 +86,7 @@ export class RegistrationPageComponent implements OnInit {
       this.isEmailInvalid = !!this.login.errors;
       this.isPasswordInvalid = !!this.password.errors;
       this.isNameInvalid = !!this.name.errors;
-      this.isPasswordConfirmInvalid = !!this.isPasswordConfirmed();
+      this.isPasswordConfirmInvalid = !this.isPasswordConfirmed();
     }
 
   }
