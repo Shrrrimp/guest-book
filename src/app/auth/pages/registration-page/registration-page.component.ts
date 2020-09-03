@@ -23,6 +23,7 @@ export class RegistrationPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
+      image: new FormControl(''),
       name: new FormControl('', [Validators.required]),
       login: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
@@ -32,7 +33,7 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   onFileSelected(event) {
-    if (event.target.files) {
+    if (event.target.files.length) {
       this.selectedFile = event.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -44,8 +45,11 @@ export class RegistrationPageComponent implements OnInit {
 
   deleteImg() {
     this.imgUrl = 'assets/images/no_avatar.png';
+    this.image.reset();
     this.selectedFile = null;
   }
+
+  get image() { return this.form.get('image'); }
 
   get login() { return this.form.get('login'); }
 

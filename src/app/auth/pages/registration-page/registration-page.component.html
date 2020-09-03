@@ -17,7 +17,7 @@
                 </div>
                 </label>
         <span>
-         <input type="file" style="display: none" (change)="onFileSelected($event)" accept=".png, .jpeg, .bmp" #fileInput>
+         <input type="file" style="display: none" (change)="onFileSelected($event)" accept=".png, .jpeg, .bmp" #fileInput formControlName="image">
          <input type="button" (click)="fileInput.click()" class="img-add-btn" value="Select image">
 
          <input type="button" (click)="deleteImg()" class="img-add-btn"  id="delete" value="&times;">
