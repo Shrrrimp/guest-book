@@ -12,8 +12,7 @@ export class LoginPageComponent implements OnInit {
 
   public form: FormGroup;
   public isDataInvalid = false;
-  public isEmailInvalid = false;
-  public isPasswordInvalid = false;
+  public submitted = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -29,19 +28,14 @@ export class LoginPageComponent implements OnInit {
   get password() { return this.form.get('password'); }
 
   submit() {
-    if (this.form.valid) {
-      this.authService.logIn(this.login.value, this.password.value).subscribe((data) => {
-        this.router.navigate(['/home']);
+    this.submitted = true;
+    if(!this.form.valid) { return; }
 
-      }, (err) => {
-        this.isDataInvalid = true;
-        this.isEmailInvalid = false;
-        this.isPasswordInvalid = false;
-      });
-    } else {
-      this.isEmailInvalid = !!this.login.errors;
-      this.isPasswordInvalid = !!this.password.errors;
-    }
+    this.authService.logIn(this.login.value, this.password.value).subscribe((data) => {
+      this.router.navigate(['/home']);
+    }, (err) => {
+      this.isDataInvalid = true;
+    });
   }
 
 }

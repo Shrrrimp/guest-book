@@ -14,10 +14,7 @@ export class RegistrationPageComponent implements OnInit {
   public selectedFile: File = null;
   public imgUrl = 'assets/images/no_avatar.png';
   public errors = [];
-  public isPasswordInvalid = false;
-  public isEmailInvalid = false;
-  public isNameInvalid = false;
-  public isPasswordConfirmInvalid = false;
+  public submitted = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -64,34 +61,26 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   submit() {
-    if (this.isPasswordConfirmed() && this.form.valid) {
-      const fd = new FormData();
-      if(this.selectedFile) {
-        fd.append('avatar', this.selectedFile, this.selectedFile.name);
-      }
-      fd.append('email', this.login.value);
-      fd.append('name', this.name.value);
-      fd.append('password', this.password.value);
-      fd.append('password_confirmation', this.passwordConfirm.value);
+    this.submitted = true;
+    if (!this.isPasswordConfirmed() || !this.form.valid) { return; }
 
-      this.authService.register(fd).subscribe((data) => {
-        this.router.navigate(['/home']);
-      }, (err) => {
-        this.isEmailInvalid = false;
-        this.isPasswordInvalid = false;
-        this.isNameInvalid = false;
-        this.isPasswordConfirmInvalid = false;
-        this.errors = [];
-        for (let key in err.error.errors) {
-          this.errors.push(err.error.errors[key]);
-        }
-      });
-    } else {
-      this.isEmailInvalid = !!this.login.errors;
-      this.isPasswordInvalid = !!this.password.errors;
-      this.isNameInvalid = !!this.name.errors;
-      this.isPasswordConfirmInvalid = !this.isPasswordConfirmed();
+    const fd = new FormData();
+    if(this.selectedFile) {
+      fd.append('avatar', this.selectedFile, this.selectedFile.name);
     }
+    fd.append('email', this.login.value);
+    fd.append('name', this.name.value);
+    fd.append('password', this.password.value);
+    fd.append('password_confirmation', this.passwordConfirm.value);
+
+    this.authService.register(fd).subscribe((data) => {
+      this.router.navigate(['/home']);
+    }, (err) => {
+      this.errors = [];
+      for (let key in err.error.errors) {
+        this.errors.push(err.error.errors[key]);
+      }
+    });
 
   }
 
