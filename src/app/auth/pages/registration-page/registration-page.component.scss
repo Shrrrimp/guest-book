@@ -1,7 +1,4 @@
-$blue: #070C27;
-$red: #FF4040;
-$white: #ffffff;
-$gray: #797FA5;
+@import "variables";
 .reg-form {
     margin: 50px auto;
     width: fit-content;
@@ -53,12 +50,12 @@ $gray: #797FA5;
                 }
             }
             .img-name {
-                display: block;
                 font-family: Arial;
                 font-style: normal;
                 font-weight: normal;
                 color: $red;
                 margin-top: 10px;
+                margin-left: 10px;
             }
         }
         display: flex;
