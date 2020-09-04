@@ -7,47 +7,46 @@
 
         <img [src]="imgUrl" class="avatar">
         <label>
-                <div class="titles">
-                 <p class="prof-img">Profile Image 
+            <div class="titles">
+                <p class="prof-img">Profile Image 
                     <span class="img-name">
                         {{ selectedFile?.name }}
                     </span>
-                 </p>
-         
-                </div>
-                </label>
+                </p>
+            </div>
+        </label>
         <span>
-         <input type="file" style="display: none" (change)="onFileSelected($event)" accept=".png, .jpeg, .bmp" #fileInput>
+         <input type="file" style="display: none" (change)="onFileSelected($event)" accept=".png, .jpeg, .bmp" #fileInput formControlName="image">
          <input type="button" (click)="fileInput.click()" class="img-add-btn" value="Select image">
 
-         <input type="button" (click)="deleteImg()" class="img-add-btn"  id="delete" value="&times;">
+         <input *ngIf="selectedFile" type="button" (click)="deleteImg()" class="img-add-btn"  id="delete" value="&times;">
         </span>
 
         <label>
             <div  class="titles">
                 <p>Name</p> 
             </div>
-            <input type="text" class="text-input" [class.required]="isNameInvalid" formControlName="name" maxlength="255"  required>
+            <input type="text" [ngClass]="{required: submitted && name.errors}" class="text-input" formControlName="name" maxlength="255"  required>
         </label>
         <label>
             <div  class="text">
                 <p>Email</p> 
             </div>
-            <input type="text" class="text-input" [class.required]="isEmailInvalid" formControlName="login" maxlength="255"  required>
+            <input type="text" class="text-input" [ngClass]="{required: submitted && login.errors}" formControlName="login" maxlength="255"  required>
         </label>
         <label>
             <div  class="titles">
                 <p>Password</p> 
             </div>
-            <input type="password" class="text-input" [class.required]="isPasswordInvalid" formControlName="password" maxlength="255" minlength="8" required>
+            <input type="password" class="text-input" [ngClass]="{required: submitted && password.errors}" formControlName="password" maxlength="255" minlength="8" required>
         </label>
         <label>
             <div  class="titles">
                 <p>Password confirmation </p> 
             </div>
-            <input type="password" class="text-input" [class.required]="isPasswordConfirmInvalid" formControlName="passwordConfirm" maxlength="255" minlength="8" required>
+            <input type="password" class="text-input" [ngClass]="{required: submitted && !isPasswordConfirmed()}" formControlName="passwordConfirm" maxlength="255" minlength="8" required>
         </label>
         <button class="reg-btn" type="submit">Register</button>
-        <a class="reg-link" href="auth/login">Log in</a>
+        <a routerLink="/auth/login" class="reg-link">Log in</a>
     </form>
 </div>

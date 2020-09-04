@@ -21,7 +21,7 @@ export class CommentsService {
   }
 
   getNextCommentsPage(page: number): Observable<CommentsList> {
-    return this.http.get<CommentsList>(`${this.baseUrl}${this.postsUrl}/?page=${page}`);
+    return this.http.get<CommentsList>(`${this.baseUrl}${this.postsUrl}?page=${page}`);
   }
 
   addComment(title: string, message: string): Observable<Comment> {

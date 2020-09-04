@@ -35,7 +35,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     private resolver: ComponentFactoryResolver
     ) {
         this.currentUserSubscription = this.authService.currentUser.subscribe(user => {
-          this.currentUser = user.user;
+          this.currentUser = user?.user || null;
         });
 
         this.publicPusherSubscription = this.pusherService.publicPush.subscribe(e => {

@@ -4,7 +4,16 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://guest-book.naveksoft.com/'
+  apiUrl: 'https://guest-book.naveksoft.com/',
+  socket: {
+    url: 'guest-book.naveksoft.com',
+    port: '443',
+    path: '/ws',
+    encrypted: true,
+    auth: {
+      url: 'https://guest-book.naveksoft.com/broadcasting/auth'
+    }
+  }
 };
 
 /*

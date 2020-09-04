@@ -14,15 +14,13 @@ export class RegistrationPageComponent implements OnInit {
   public selectedFile: File = null;
   public imgUrl = 'assets/images/no_avatar.png';
   public errors = [];
-  public isPasswordInvalid = false;
-  public isEmailInvalid = false;
-  public isNameInvalid = false;
-  public isPasswordConfirmInvalid = false;
+  public submitted = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
+      image: new FormControl(''),
       name: new FormControl('', [Validators.required]),
       login: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
@@ -32,7 +30,7 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   onFileSelected(event) {
-    if (event.target.files) {
+    if (event.target.files.length) {
       this.selectedFile = event.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -44,8 +42,11 @@ export class RegistrationPageComponent implements OnInit {
 
   deleteImg() {
     this.imgUrl = 'assets/images/no_avatar.png';
+    this.image.reset();
     this.selectedFile = null;
   }
+
+  get image() { return this.form.get('image'); }
 
   get login() { return this.form.get('login'); }
 
@@ -60,32 +61,26 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   submit() {
-    if (this.isPasswordConfirmed() && this.form.valid) {
-      const fd = new FormData();
-      fd.append('avatar', this.selectedFile, this.selectedFile.name);
-      fd.append('email', this.login.value);
-      fd.append('name', this.name.value);
-      fd.append('password', this.password.value);
-      fd.append('password_confirmation', this.passwordConfirm.value);
+    this.submitted = true;
+    if (!this.isPasswordConfirmed() || !this.form.valid) { return; }
 
-      this.authService.register(fd).subscribe((data) => {
-        this.router.navigate(['/home']);
-      }, (err) => {
-        this.isEmailInvalid = false;
-        this.isPasswordInvalid = false;
-        this.isNameInvalid = false;
-        this.isPasswordConfirmInvalid = false;
-        this.errors = [];
-        for (let key in err.error.errors) {
-          this.errors.push(err.error.errors[key]);
-        }
-      });
-    } else {
-      this.login.errors ? this.isEmailInvalid = true : this.isEmailInvalid = false;
-      this.password.errors ? this.isPasswordInvalid = true : this.isPasswordInvalid = false;
-      this.name.errors ? this.isNameInvalid = true : this.isNameInvalid = false;
-      this.isPasswordConfirmed() ? this.isPasswordConfirmInvalid = false : this.isPasswordConfirmInvalid = true;
+    const fd = new FormData();
+    if(this.selectedFile) {
+      fd.append('avatar', this.selectedFile, this.selectedFile.name);
     }
+    fd.append('email', this.login.value);
+    fd.append('name', this.name.value);
+    fd.append('password', this.password.value);
+    fd.append('password_confirmation', this.passwordConfirm.value);
+
+    this.authService.register(fd).subscribe((data) => {
+      this.router.navigate(['/home']);
+    }, (err) => {
+      this.errors = [];
+      for (let key in err.error.errors) {
+        this.errors.push(err.error.errors[key]);
+      }
+    });
 
   }
 
