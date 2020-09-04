@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Comment } from '../../models/comment.model';
 import { CommentsService } from '../../services/comments.service';
 import { AnswersList } from '../../models/answer.model';
@@ -6,13 +6,16 @@ import { User } from '../../models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { Subscription } from 'rxjs';
+import { PusherService } from '../../services/pusher.service';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent implements OnInit {
+export class CommentComponent implements OnInit, OnDestroy {
+  private privatePusherSubscription: Subscription;
 
   @Input() public comment: Comment | undefined;
   @Input() public currentUser: User | null;
@@ -33,11 +36,28 @@ export class CommentComponent implements OnInit {
   public modalTitle = 'Are you sure?';
   public modalMessage = 'Do you want to delete message?';
 
-  constructor(public commentsService: CommentsService, public utilsService: UtilsService) {}
+  constructor(
+    public commentsService: CommentsService, 
+    public utilsService: UtilsService, 
+    private pusherService: PusherService
+    ) {}
 
   ngOnInit(): void {
     this.addAnswerForm = new FormGroup({
       message: new FormControl('', [Validators.required, Validators.maxLength(65535)])
+    });
+
+    this.privatePusherSubscription = this.pusherService.privatePush.subscribe(e => {
+      if (!e) { return; }
+      if (e.data.post.id !== this.comment.id) { return; }
+
+      this.comment.answers_count ? ++this.comment.answers_count : this.comment.answers_count = 1;
+      if (!this.isAnswersListVisible) { return; }
+
+      if (this.paginationConfig.currentPage === this.answersList.meta.last_page) {
+        this.answersList.data.push(e.data);
+      }
+
     });
   }
 
@@ -131,6 +151,10 @@ export class CommentComponent implements OnInit {
       this.comment.answers_count ? ++this.comment.answers_count : this.comment.answers_count = 1;
       this.addAnswerForm.reset();
     }, err => console.error(err));
+  }
+
+  ngOnDestroy() {
+    this.privatePusherSubscription.unsubscribe();
   }
 
 }
